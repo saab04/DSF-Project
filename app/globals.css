@@ -1,10 +1,68 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+
+  /* colors */
+  --primary: #1F3A5F;
+  --background: #F5F7FA;
+  --foreground: #E8EEF5;
+  --textPrimary: #2E2E2E;
+  --textSecondary: #4A5A6F;
+  --destructive: #A63A3A;
+  --buttons: #C9A24D;
+  --header-footer-text: #A7B9D7;
+
+  /* sizeing */
+  --header-h: 5rem;
+  --footer-h: 30vh;
+
+  /* fonts */
+  --fontPrimary: 'Playfair Display', 'serif';
+
+
 }
 
 @theme {
+  --color-primary: var(--primary);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-textPrimary: var(--textPrimary);
+  --color-textSecondary: var(--textSecondary);
+  --color-destructive: var(--destructive);
+  --color-buttons: var(--buttons);
+  --color-textHF: var(--header-footer-text);
 
+  --font-primary: var(--fontPrimary);
 }
+
+* {
+  box-sizing: border-box;
+}
+
+/* grid */
+
+body {
+  display: grid;
+  height: 130vh;
+  overflow-x: hidden;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: var(--header-h) auto var(--footer-h);
+  grid-template-areas: 
+  "header header header"
+  "main main main"
+  "footer footer footer";
+}
+
+header {
+  grid-area: header;
+}
+
+main {
+  grid-area: main;
+}
+
+footer {
+  grid-area: footer;
+}
+
+
