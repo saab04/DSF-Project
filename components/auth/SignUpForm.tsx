@@ -1,34 +1,24 @@
 "use client";
 
-import { useState } from "react";
 import { SignUp } from "@/lib/auth";
 import Link from "next/link";
+import { useActionState } from "react";
 
 const RegisterForm = () => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [username, setUsername] = useState("");
-
-  const clearForm = async (e: React.FormEvent) => {
-    console.log("Hello");
-  };
-
+  const [state, action] = useActionState(SignUp, "");
   return (
     <div className="w-[40vw] max-w-100 min-w-70 flex flex-col aspect-9/10 max-h-112.5 bg-foreground rounded-[20px] shadow-xl text-primary relative">
       <div className="flex justify-center items-center w-full h-[20%] min-h-12">
         <h2 className="sm:text-[30px] text-[25px]">Sign Up</h2>
       </div>
       <form
-        action={SignUp}
-        onSubmit={clearForm}
+        action={action}
         className="w-full h-[80%] flex flex-wrap justify-center"
       >
         <input
           type="text"
           name="username"
           placeholder="Username"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
           required
           className="w-[80%] h-9.5 rounded-md bg-white px-3 mb-3 sm:h-11 focus:outline-0 shadow"
         />
@@ -36,8 +26,6 @@ const RegisterForm = () => {
           type="email"
           name="email"
           placeholder="Email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
           required
           className="w-[80%] h-9.5 rounded-md bg-white px-3 mb-3 sm:h-11 focus:outline-0 shadow"
         />
@@ -45,8 +33,6 @@ const RegisterForm = () => {
           type="password"
           name="password"
           placeholder="Password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
           required
           className="w-[80%] h-9.5 rounded-md bg-white px-3 mb-3 sm:h-11 focus:outline-0 shadow"
         />

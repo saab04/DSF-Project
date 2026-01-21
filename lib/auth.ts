@@ -1,7 +1,9 @@
 "use server"
+
 import { createClient } from "./supabase/server"
 
-export async function SignUp(formData: FormData){
+export async function SignUp(prevState: string, formData: FormData){
+    await new Promise((resolve) => setTimeout(resolve, 1000))
     const username = formData.get("username") as string;
     const email = formData.get("email") as string;
     const password = formData.get("password") as string;
@@ -21,7 +23,10 @@ export async function SignUp(formData: FormData){
     }
 
     if (error){
-        console.log(error);
+        console.log(error)
+        return ""
     }
 
+    return "The account was created"
 }
+
