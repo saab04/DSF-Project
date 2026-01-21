@@ -10,6 +10,7 @@
   --textSecondary: #4A5A6F;
   --destructive: #A63A3A;
   --buttons: #C9A24D;
+  --buttons-hover: #a67c3d;
   --header-footer-text: #A7B9D7;
 
   /* sizeing */
@@ -30,6 +31,7 @@
   --color-textSecondary: var(--textSecondary);
   --color-destructive: var(--destructive);
   --color-buttons: var(--buttons);
+  --color-buttonsHover: var(--buttons-hover);
   --color-textHF: var(--header-footer-text);
 
   --font-primary: var(--fontPrimary);
@@ -59,6 +61,8 @@ header {
 
 main {
   grid-area: main;
+  padding: 20px;
+  font-family: var(--font-primary);
 }
 
 footer {

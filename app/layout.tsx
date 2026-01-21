@@ -16,13 +16,15 @@ export default function RootLayout({
     <html lang="en">
       <body>
         <header className="flex items-center bg-primary text-textHF text-[30px]">
-          <Link href="/" className="ml-[30px] font-primary">
+          <Link href="/" className="ml-7.5 font-primary">
             NextBooking
           </Link>
         </header>
-        <main className="flex justify-center items-center">{children}</main>
+        <main className="flex justify-center items-center bg-background">
+          {children}
+        </main>
         <footer className="flex justify-center bg-primary relative">
-          <div className="absolute top-[20px]  font-primary text-[32px] text-textHF">
+          <div className="absolute top-5 font-primary text-[32px] text-textHF">
             NextBooking
           </div>
         </footer>
