@@ -5,7 +5,7 @@ import Link from "next/link";
 import { useActionState } from "react";
 
 const RegisterForm = () => {
-  const [state, action] = useActionState(SignUp, "");
+  const [state, action, pending] = useActionState(SignUp, {});
   return (
     <div className="w-[40vw] max-w-100 min-w-70 flex flex-col aspect-9/10 max-h-112.5 bg-foreground rounded-[20px] shadow-xl text-primary relative">
       <div className="flex justify-center items-center w-full h-[20%] min-h-12">
@@ -18,6 +18,7 @@ const RegisterForm = () => {
         <input
           type="text"
           name="username"
+          defaultValue={state?.values?.username}
           placeholder="Username"
           required
           className="w-[80%] h-9.5 rounded-md bg-white px-3 mb-3 sm:h-11 focus:outline-0 shadow"
@@ -25,6 +26,7 @@ const RegisterForm = () => {
         <input
           type="email"
           name="email"
+          defaultValue={state?.values?.email}
           placeholder="Email"
           required
           className="w-[80%] h-9.5 rounded-md bg-white px-3 mb-3 sm:h-11 focus:outline-0 shadow"
@@ -32,12 +34,15 @@ const RegisterForm = () => {
         <input
           type="password"
           name="password"
+          minLength={8}
+          defaultValue={state?.values?.password}
           placeholder="Password"
           required
           className="w-[80%] h-9.5 rounded-md bg-white px-3 mb-3 sm:h-11 focus:outline-0 shadow"
         />
         <div className="w-full h-20 flex justify-center items-center">
           <button
+            disabled={pending}
             type="submit"
             className="bg-buttons w-[40%] h-[50%] text-[20px] rounded-md mb-7 cursor-pointer hover:bg-buttonsHover transition"
           >
@@ -51,6 +56,7 @@ const RegisterForm = () => {
           Login page
         </Link>
       </div>
+      <div>{state?.err}</div>
     </div>
   );
 };
