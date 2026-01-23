@@ -30,19 +30,42 @@ export async function SignUp(prevState: {}, formData: FormData){
     }
 
     await supabase.from("Users").insert({
+        id: response.data.user?.id,
         Username: username,
-        id: response.data.user?.id
+        Email: email
     });
 
-    redirect("/dashboard");
-
+    redirect("/dashboard")
     return {}
-
-    
 }
 
 
-export async function LogIn() {
-    
+export async function LogIn(prevState: {}, formData: FormData) {
+    const username = formData.get("username") as string;
+    const password = formData.get("password") as string;
+
+    const supabase = await createClient();
+    const values = {username: username, password: ""}
+
+    const { data } = await supabase.from("Users").select("*").eq("Username", username).limit(1).single();
+
+    const response = await supabase.auth.signInWithPassword({
+        email: data.Email,
+        password: password
+     });
+    if (response.error){
+        return {err: response.error.message, values}
+    }
+    redirect("/dashboard")
+    return {}
 }
+
+export async function getUsername() {
+    const supabase = await createClient();
+    const response = await supabase.auth.getSession();
+    const { data } = await supabase.from("Users").select("Username").eq("id", response.data.session?.user.id).limit(1).single();
+    return data?.Username;
+}
+
+
 

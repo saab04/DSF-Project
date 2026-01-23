@@ -1,10 +1,9 @@
 "use client";
 
 import { SignUp } from "@/lib/auth";
-import Link from "next/link";
 import { useActionState } from "react";
 
-const RegisterForm = () => {
+const SignUpForm = () => {
   const [state, action, pending] = useActionState(SignUp, {});
   return (
     <div className="w-[40vw] max-w-100 min-w-70 flex flex-col aspect-9/10 max-h-112.5 bg-foreground rounded-[20px] shadow-xl text-primary relative">
@@ -50,15 +49,9 @@ const RegisterForm = () => {
           </button>
         </div>
       </form>
-      <div className="absolute top-[calc(100%+10px)] text-primary w-full flex justify-center gap-2 text-[14px] sm:text-[16px]">
-        <p>Already have an account?</p>
-        <Link href="/login" className="text-blue-700">
-          Login page
-        </Link>
-      </div>
       <div>{state?.err}</div>
     </div>
   );
 };
 
-export default RegisterForm;
+export default SignUpForm;
