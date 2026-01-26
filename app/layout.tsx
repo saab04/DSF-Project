@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import "./globals.css";
+import UserMenu from "@/components/layout/UserMenu";
 
 export const metadata: Metadata = {
   title: "NextBooking",
@@ -15,16 +16,17 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <header className="flex items-center bg-primary text-textHF text-[30px]">
-          <Link href="/" className="ml-7.5 font-primary">
+        <header className="flex items-center justify-between bg-primary text-textHF">
+          <Link href="/" className="ml-7.5 text-[30px]">
             NextBooking
           </Link>
+          <UserMenu />
         </header>
         <main className="flex justify-center items-center bg-background">
           {children}
         </main>
         <footer className="flex justify-center bg-primary relative">
-          <div className="absolute top-5 font-primary text-[32px] text-textHF">
+          <div className="absolute top-5 text-[32px] text-textHF">
             NextBooking
           </div>
         </footer>
