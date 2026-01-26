@@ -35,10 +35,23 @@
   --color-textHF: var(--header-footer-text);
 
   --font-primary: var(--fontPrimary);
+
 }
+
+@keyframes fade {
+  0% { opacity: 0; }
+  50% { opacity: 1; }
+  100% { opacity: 0; }
+}
+
+.fade {
+  animation: fade 3s ease-in-out infinite;
+}
+
 
 * {
   box-sizing: border-box;
+  font-family: var(--fontPrimary);
 }
 
 /* grid */
@@ -57,13 +70,11 @@ body {
 
 header {
   grid-area: header;
-  font-family: var(--font-primary);
 }
 
 main {
   grid-area: main;
   padding: 20px;
-  font-family: var(--font-primary);
 }
 
 footer {

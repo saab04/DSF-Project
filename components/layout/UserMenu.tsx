@@ -1,8 +1,9 @@
 import { getUsername } from "@/lib/auth";
-import LogOutButton from "./LogOutButton";
+import LogOutButton from "../auth/LogOutButton";
+import { User } from "lucide-react";
 import { createClient } from "@/lib/supabase/server";
 import Link from "next/link";
-const Profile = async () => {
+const UserMenu = async () => {
   const supabase = await createClient();
   const username = await getUsername();
   const {
@@ -11,7 +12,10 @@ const Profile = async () => {
   return (
     user && (
       <div className="flex items-center justify-center gap-7 w-auto h-full mr-5">
-        <p className="w-60 text-center">Logged in as: {username} </p>
+        <div className="flex justify-center gap-3 items-center w-50 h-full">
+          <User />
+          <p>{username}</p>
+        </div>
         <LogOutButton />
         <Link
           href="/dashboard/user"
@@ -24,4 +28,4 @@ const Profile = async () => {
   );
 };
 
-export default Profile;
+export default UserMenu;
