@@ -6,7 +6,7 @@ import { useActionState } from "react";
 const SignUpForm = () => {
   const [state, action, pending] = useActionState(SignUp, {});
   return (
-    <div className="w-[40vw] max-w-100 min-w-70 flex flex-col aspect-9/10 max-h-112.5 bg-foreground rounded-[20px] shadow-xl text-primary relative">
+    <div className="w-[40vw] max-w-100 min-w-70 flex flex-col aspect-9/10 max-h-112.5 bg-foreground rounded-[20px] shadow-xl text-textPrimary relative">
       <div className="flex justify-center items-center w-full h-[20%] min-h-12">
         <h2 className="sm:text-[30px] text-[25px]">Sign Up</h2>
       </div>

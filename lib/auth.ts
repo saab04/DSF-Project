@@ -62,8 +62,8 @@ export async function LogIn(prevState: {}, formData: FormData) {
 
 export async function getUsername() {
     const supabase = await createClient();
-    const response = await supabase.auth.getSession();
-    const { data } = await supabase.from("Users").select("Username").eq("id", response.data.session?.user.id).limit(1).single();
+    const response = await supabase.auth.getUser();
+    const { data } = await supabase.from("Users").select("Username").eq("id", response.data?.user?.id).limit(1).single();
     return data?.Username;
 }
 

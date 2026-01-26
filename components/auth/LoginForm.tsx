@@ -3,11 +3,10 @@
 import { LogIn } from "@/lib/auth";
 import Link from "next/link";
 import { useActionState } from "react";
-import { useRouter } from "next/navigation";
 const LoginForm = () => {
   const [state, action, pending] = useActionState(LogIn, {});
   return (
-    <div className="w-[40vw] max-w-100 min-w-70 flex flex-col aspect-9/10 max-h-80 bg-foreground rounded-[20px] shadow-xl text-primary relative">
+    <div className="w-[40vw] max-w-100 min-w-70 flex flex-col aspect-9/10 max-h-75 bg-foreground rounded-[20px] shadow-xl text-textPrimary relative">
       <div className="flex justify-center items-center w-full h-[25%] min-h-12">
         <h2 className="sm:text-[30px] text-[25px]">Log in</h2>
       </div>
@@ -42,7 +41,7 @@ const LoginForm = () => {
           </button>
         </div>
       </form>
-      <div className="absolute top-[calc(100%+10px)] text-primary w-full flex justify-center gap-2 text-[14px] sm:text-[16px]">
+      <div className="absolute top-[calc(100%+10px)] text-textPrimary w-full flex justify-center gap-2 text-[14px] sm:text-[16px]">
         <p>Dont have an account?</p>
         <Link href="/signup" className="text-blue-700">
           Sign up

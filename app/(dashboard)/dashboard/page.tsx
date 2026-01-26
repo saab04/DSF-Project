@@ -1,6 +1,5 @@
-import Profile from "@/components/auth/Profile";
 const Dashboard = () => {
-  return <Profile />;
+  return <div>Dashboard</div>;
 };
 
 export default Dashboard;

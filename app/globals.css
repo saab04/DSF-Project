@@ -57,6 +57,7 @@ body {
 
 header {
   grid-area: header;
+  font-family: var(--font-primary);
 }
 
 main {
