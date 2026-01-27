@@ -6,6 +6,7 @@ import UserMenu from "@/components/layout/UserMenu";
 
 export const metadata: Metadata = {
   title: "NextBooking",
+  description: "Hotel Booking System",
 };
 
 export const viewport: Viewport = {
