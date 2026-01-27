@@ -58,7 +58,6 @@
 
 body {
   display: grid;
-  min-height: 130vh;
   overflow-x: hidden;
   grid-template-columns: repeat(3, 1fr);
   grid-template-rows: var(--header-h) auto var(--footer-h);
@@ -75,7 +74,7 @@ header {
 main {
   grid-area: main;
   padding: 20px;
-  min-height: calc(100vh - var(--header-h));
+  min-height: 100vh;
 }
 
 footer {
