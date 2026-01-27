@@ -47,7 +47,11 @@ export async function LogIn(prevState: {}, formData: FormData) {
     const supabase = await createClient();
     const values = {username: username, password: ""}
 
-    const { data } = await supabase.from("Users").select("*").eq("Username", username).limit(1).single();
+    const { data, error} = await supabase.from("Users").select("*").eq("Username", username).limit(1).single();
+    
+    if(error){
+        return {err: "Invalid login credentials", values}
+    }
 
     const response = await supabase.auth.signInWithPassword({
         email: data.Email,

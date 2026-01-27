@@ -9,7 +9,7 @@ const HomePage = () => {
           href="/bookings/date"
           className="flex text-center justify-center items-center w-full h-full absolute hover:bg-buttonsHover rounded-2xl"
         >
-          <p className="w-[90%] animate-bounce">Make your reservation</p>
+          <p className="w-[90%]">Make your reservation</p>
         </Link>
       </div>
       <div className="sm:w-[60vw] w-[90vw] aspect-1920/1280 min-h-47.5">

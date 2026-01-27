@@ -2,6 +2,7 @@
 
 import { SignUp } from "@/lib/auth";
 import { useActionState } from "react";
+import { LoaderCircle } from "lucide-react";
 
 const SignUpForm = () => {
   const [state, action, pending] = useActionState(SignUp, {});
@@ -43,13 +44,15 @@ const SignUpForm = () => {
           <button
             disabled={pending}
             type="submit"
-            className="bg-buttons w-[40%] h-[50%] text-[20px] rounded-md mb-7 cursor-pointer hover:bg-buttonsHover transition"
+            className="flex justify-center items-center bg-buttons w-[40%] h-[50%] text-[20px] rounded-md mb-7 cursor-pointer hover:bg-buttonsHover transition"
           >
-            Sign up
+            {pending ? <LoaderCircle className="animate-spin" /> : "Sign up"}
           </button>
         </div>
       </form>
-      <div>{state?.err}</div>
+      <div className="flex items-center justify-center w-full h-10 text-destructive">
+        {state?.err}
+      </div>
     </div>
   );
 };

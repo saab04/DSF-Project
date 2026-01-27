@@ -16,7 +16,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <header className="flex items-center justify-between bg-primary text-textHF">
+        <header className="flex items-center justify-between bg-primary text-textHF relative">
           <Link href="/" className="ml-7.5 text-[30px]">
             NextBooking
           </Link>

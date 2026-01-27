@@ -2,6 +2,7 @@
 
 import { LogIn } from "@/lib/auth";
 import Link from "next/link";
+import { LoaderCircle } from "lucide-react";
 import { useActionState } from "react";
 const LoginForm = () => {
   const [state, action, pending] = useActionState(LogIn, {});
@@ -35,19 +36,21 @@ const LoginForm = () => {
           <button
             disabled={pending}
             type="submit"
-            className="bg-buttons w-[40%] h-[50%] text-[20px] rounded-md cursor-pointer hover:bg-buttonsHover transition"
+            className="flex justify-center items-center bg-buttons w-[40%] h-[50%] text-[20px] rounded-md cursor-pointer hover:bg-buttonsHover transition"
           >
-            Log in
+            {pending ? <LoaderCircle className="animate-spin" /> : "Log in"}
           </button>
         </div>
       </form>
+      <div className="flex items-center justify-center w-full h-10 text-destructive">
+        {state?.err}
+      </div>
       <div className="absolute top-[calc(100%+10px)] text-textPrimary w-full flex justify-center gap-2 text-[14px] sm:text-[16px]">
         <p>Dont have an account?</p>
         <Link href="/signup" className="text-blue-700">
           Sign up
         </Link>
       </div>
-      <div>{state?.err}</div>
     </div>
   );
 };
