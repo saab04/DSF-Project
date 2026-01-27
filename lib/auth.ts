@@ -3,7 +3,7 @@
 import { redirect } from "next/navigation";
 import { createClient } from "./supabase/server"
 
-export async function SignUp(prevState: {}, formData: FormData){
+export async function SignUp(prevState: {}, formData: FormData) {
     const username = formData.get("username") as string;
     const email = formData.get("email") as string;
     const password = formData.get("password") as string;
@@ -69,6 +69,15 @@ export async function getUsername() {
     const response = await supabase.auth.getUser();
     const { data } = await supabase.from("Users").select("Username").eq("id", response.data?.user?.id).limit(1).single();
     return data?.Username;
+}
+
+export async function isAdmin() {
+    const supabase = await createClient();
+    const {data: isAdmin, error} = await supabase.rpc("is_admin");
+    if(error){
+        alert("Not authorized")
+    }
+    return isAdmin;
 }
 
 

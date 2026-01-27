@@ -22,7 +22,7 @@ export default function RootLayout({
     <html lang="en">
       <body>
         <header className="flex items-center justify-between bg-primary text-textHF relative">
-          <Link href="/" className="ml-7.5 text-[30px]">
+          <Link href="/" className="ml-7.5 text-[30px] z-2">
             NextBooking
           </Link>
           <UserMenu />
