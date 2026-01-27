@@ -75,6 +75,7 @@ header {
 main {
   grid-area: main;
   padding: 20px;
+  min-height: calc(100vh - var(--header-h));
 }
 
 footer {
