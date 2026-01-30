@@ -1,5 +1,6 @@
+import DateForm from "@/components/bookings/DateForm";
 const Date = () => {
-  return <div></div>;
+  return <DateForm />;
 };
 
 export default Date;
