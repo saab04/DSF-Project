@@ -81,5 +81,16 @@ export async function isAdmin() {
     return isAdmin;
 }
 
-
+export async function availableRooms() {
+    const supabase = await createClient();
+    const { data: roomsize, error } = await supabase.rpc("available_rooms");
+    var roomTotal = {Small: 0, Medium: 0, Large: 0};
+    if (error) {
+        console.log("No available rooms");
+    }
+    for (const room of roomsize) {
+        roomTotal[room as keyof typeof roomTotal] += 1;
+    }
+    return roomsize;
+}
 
