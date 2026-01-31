@@ -1,5 +1,6 @@
+import DateDisplay from "@/components/bookings/DateDisplay";
 const Rooms = () => {
-  return <div></div>;
+  return <DateDisplay />;
 };
 
 export default Rooms;
