@@ -5,15 +5,19 @@ import { ChevronDown, ChevronUp } from "lucide-react";
 import Link from "next/link";
 
 const DateForm = () => {
-  const [checkIn, setCheckIn] = useState("");
-  const [checkOut, setCheckOut] = useState("");
-  const [guests, setGuests] = useState(1);
-
   const today = new Date();
+  const tomorrow = new Date(today);
+  tomorrow.setDate(tomorrow.getDate() + 1);
 
-  const formatDate = (date: Date) => {
+   const formatDate = (date: Date) => {
     return date.toLocaleDateString("sv-SE");
   };
+
+  const [checkIn, setCheckIn] = useState(formatDate(today));
+  const [checkOut, setCheckOut] = useState(formatDate(tomorrow));
+  const [guests, setGuests] = useState(1);
+
+ 
 
   const addDays = (date: Date, days: number) => {
     const d = new Date(date);
