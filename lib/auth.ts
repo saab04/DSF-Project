@@ -91,6 +91,6 @@ export async function availableRooms() {
     for (const room of roomsize) {
         roomTotal[room as keyof typeof roomTotal] += 1;
     }
-    return roomsize;
+    return roomTotal
 }
 

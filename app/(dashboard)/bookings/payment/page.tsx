@@ -1,5 +1,7 @@
+import BookingPayment from "@/components/bookings/BookingPayment";
+
 const Payment = () => {
-  return <div></div>;
+  return <BookingPayment />;
 };
 
 export default Payment;
