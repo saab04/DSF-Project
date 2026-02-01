@@ -22,11 +22,8 @@ const DateDisplayContent = () => {
       <p>Guests: {guests}</p>
     </div>
     <button 
-      style={{ padding: "10px 20px", backgroundColor: "#007bff", color: "white", border: "none", borderRadius: "5px", cursor: "pointer", transition: "all 0.2s ease" }}
-      onMouseDown={(e) => e.currentTarget.style.transform = "scale(0.95)"}
-      onMouseUp={(e) => e.currentTarget.style.transform = "scale(1)"}
-      onMouseLeave={(e) => e.currentTarget.style.transform = "scale(1)"}
-      onClick ={availableRoomhandler}>Check Available Rooms, click here and check logs.
+      className="bg-buttons hover:bg-buttonsHover text-textPrimary px-5 py-2.5 rounded-md cursor-pointer transition-all duration-200 active:scale-95"
+      onClick={availableRoomhandler}>Check Available Rooms, click here and check logs.
     </button>
     <div style={{ display: "flex", gap: "20px", marginTop: "20px" }}>
         <div style={{ border: "1px solid #ccc", padding: "15px", borderRadius: "8px" }}>
