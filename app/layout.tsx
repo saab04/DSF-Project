@@ -28,7 +28,7 @@ export default function RootLayout({
           </Link>
           <UserMenu />
         </header>
-        <main className="flex justify-center items-center bg-background min-h-s">
+        <main className="flex justify-center items-center bg-background relative">
           {children}
         </main>
         <footer className="flex justify-center bg-primary relative">
