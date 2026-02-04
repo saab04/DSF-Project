@@ -46,51 +46,51 @@ const BookingContent = () => {
 
   return (
     <div className="w-[90%] h-full flex flex-col justify-center items-center gap-15 text-textPrimary">
-      <div className="sm:w-[60vw] w-[80vw] min-h-56 flex flex-col flex-wrap bg-foreground shadow rounded-xl pb-5">
+      <div className="sm:w-[60vw] w-[90vw] min-h-56 flex flex-col flex-wrap bg-foreground shadow rounded-xl pb-5">
         <div className="flex items-center justify-center h-15">
           <h2 className="text-[30px]">Booking details</h2>
         </div>
-        <div className="w-full flex flex-wrap justify-center gap-5">
-          <div className="w-[40%] sm:min-w-70 min-w-[80%] flex flex-col justify-center gap-2 min-h-40">
+        <div className="w-full flex flex-wrap justify-center">
+          <div className="w-[40%] sm:min-w-70 min-w-[90%] flex flex-col justify-center gap-2 min-h-40">
             <div className="w-full flex items-center gap-2">
-              <div className="flex-1 flex justify-end items-center gap-1">
+              <div className="flex-1 min-w-31.25 flex justify-end items-center gap-1">
                 <Calendar size={18} color="var(--textPrimary)" />
                 <p>Check in:</p>
               </div>
               <p className="flex-1 text-start">{bookingDetails.checkIn}</p>
             </div>
             <div className="w-full flex items-center gap-2">
-              <div className="flex-1 flex justify-end items-center gap-1">
+              <div className="flex-1 min-w-31.25 flex justify-end items-center gap-1">
                 <Calendar size={18} color="var(--textPrimary)" />
                 <p>Check out:</p>
               </div>
               <p className="flex-1 text-start">{bookingDetails.checkOut}</p>
             </div>
             <div className="w-full flex items-center gap-2">
-              <div className="flex-1 flex justify-end items-center gap-1">
+              <div className="flex-1 min-w-31.25 flex justify-end items-center gap-1">
                 <User size={18} color="var(--textPrimary)" />
                 <p>Guests:</p>
               </div>
               <p className="flex-1 text-start">{bookingDetails.guests}</p>
             </div>
           </div>
-          <div className="w-[40%] sm:min-w-70 min-w-[80%] flex flex-col justify-center gap-2 min-h-40">
+          <div className="w-[40%] sm:min-w-70 min-w-[90%] flex flex-col justify-center gap-2 min-h-40">
             <div className="w-full flex items-center gap-2">
-              <div className="flex-1 flex justify-end items-center gap-1">
+              <div className="flex-1 min-w-31.25 flex justify-end items-center gap-1">
                 <BedSingle size={18} color="var(--textPrimary)" />
                 <p>Small rooms:</p>
               </div>
               <p className="flex-1 text-start">{bookingDetails.small}</p>
             </div>
             <div className="w-full flex items-center gap-2">
-              <div className="flex-1 flex justify-end items-center gap-1">
+              <div className="flex-1 min-w-31.25 flex justify-end items-center gap-1">
                 <BedSingle size={18} color="var(--textPrimary)" />
                 <p>Medium rooms:</p>
               </div>
               <p className="flex-1 text-start">{bookingDetails.medium}</p>
             </div>
             <div className="w-full flex items-center gap-2">
-              <div className="flex-1 flex justify-end items-center gap-1">
+              <div className="flex-1 min-w-31.25 flex justify-end items-center gap-1">
                 <BedDouble size={18} color="var(--textPrimary)" />
                 <p>Large rooms:</p>
               </div>
@@ -99,7 +99,7 @@ const BookingContent = () => {
           </div>
         </div>
       </div>
-      <div className="w-[80vw] sm:max-w-130 h-170 flex flex-col justify-end items-center bg-foreground rounded-xl shadow-xl relative">
+      <div className="w-[90vw] sm:max-w-130 h-170 flex flex-col justify-end items-center bg-foreground rounded-xl shadow-xl relative">
         <h2 className="text-[30px] absolute top-4 text-center mb-3">Payment</h2>
         <form className="h-[85%] w-[90%] flex flex-col mb-5">
           <div className="w-full h-30 flex flex-col justify-center items-start mb-8 sm:mb-0 relative">
