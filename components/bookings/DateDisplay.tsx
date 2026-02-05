@@ -16,17 +16,25 @@ const DateDisplayContent = () => {
 
   return (
     <div>
-    <div>
-      <p>Arrival date: {checkIn}</p>
-      <p>Departure date: {checkOut}</p>
-      <p>Guests: {guests}</p>
-    </div>
-    <button 
-      className="bg-buttons hover:bg-buttonsHover text-textPrimary px-5 py-2.5 rounded-md cursor-pointer transition-all duration-200 active:scale-95"
-      onClick={availableRoomhandler}>Check Available Rooms, click here and check logs.
-    </button>
-    <div style={{ display: "flex", gap: "20px", marginTop: "20px" }}>
-        <div style={{ border: "1px solid #ccc", padding: "15px", borderRadius: "8px" }}>
+      <div>
+        <p>Arrival date: {checkIn}</p>
+        <p>Departure date: {checkOut}</p>
+        <p>Guests: {guests}</p>
+      </div>
+      <button
+        className="bg-buttons hover:bg-buttonsHover text-textPrimary px-5 py-2.5 rounded-md cursor-pointer transition-all duration-200 active:scale-95"
+        onClick={availableRoomhandler}
+      >
+        Check Available Rooms, click here and check logs.
+      </button>
+      <div style={{ display: "flex", gap: "20px", marginTop: "20px" }}>
+        <div
+          style={{
+            border: "1px solid #ccc",
+            padding: "15px",
+            borderRadius: "8px",
+          }}
+        >
           <h3>Room: Small</h3>
           <input
             type="number"
@@ -35,8 +43,14 @@ const DateDisplayContent = () => {
             onChange={(e) => setSmallRooms(parseInt(e.target.value) || 0)}
           />
         </div>
-        
-        <div style={{ border: "1px solid #ccc", padding: "15px", borderRadius: "8px" }}>
+
+        <div
+          style={{
+            border: "1px solid #ccc",
+            padding: "15px",
+            borderRadius: "8px",
+          }}
+        >
           <h3>Room: Medium</h3>
           <input
             type="number"
@@ -45,8 +59,14 @@ const DateDisplayContent = () => {
             onChange={(e) => setMediumRooms(parseInt(e.target.value) || 0)}
           />
         </div>
-        
-        <div style={{ border: "1px solid #ccc", padding: "15px", borderRadius: "8px" }}>
+
+        <div
+          style={{
+            border: "1px solid #ccc",
+            padding: "15px",
+            borderRadius: "8px",
+          }}
+        >
           <h3>Room: Large</h3>
           <input
             type="number"
@@ -60,9 +80,16 @@ const DateDisplayContent = () => {
             onClick={(e) => {}}
             href={{
               pathname: "/bookings/payment",
-              query: { checkIn: checkIn, checkOut: checkOut, guests: guests, small: smallRooms, medium: mediumRooms, large: largeRooms },
+              query: {
+                checkIn: checkIn,
+                checkOut: checkOut,
+                guests: guests,
+                small: smallRooms,
+                medium: mediumRooms,
+                large: largeRooms,
+              },
             }}
-            className="flex justify-center items-center bg-buttons w-[30%] min-w-25 h-[120%] min-h-10 text-[20px] rounded-md cursor-pointer hover:bg-buttonsHover transition absolute sm:bottom-0 sm:right-0 sm:top-0 sm:mr-5 top-[250%] m-auto inset-0 disabled"
+            className="flex justify-center items-center bg-buttons w-[30%] min-w-50 aspect-square"
           >
             Proceed to payment
           </Link>
@@ -75,17 +102,14 @@ const DateDisplayContent = () => {
 const availableRoomhandler = async () => {
   const rooms = await availableRooms();
   console.log(rooms);
-}
+};
 
 const DateDisplay = () => {
-
-
   return (
     <div>
-    <Suspense fallback={<div>Loading...</div>}>
-      <DateDisplayContent />
-    </Suspense>
-    
+      <Suspense fallback={<div>Loading...</div>}>
+        <DateDisplayContent />
+      </Suspense>
     </div>
   );
 };

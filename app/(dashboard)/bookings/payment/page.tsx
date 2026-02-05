@@ -1,6 +1,6 @@
 import BookingPayment from "@/components/bookings/BookingPayment";
 
-const Payment = () => {
+const Payment = async () => {
   return <BookingPayment />;
 };
 

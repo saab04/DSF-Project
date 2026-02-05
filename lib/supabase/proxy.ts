@@ -1,5 +1,6 @@
 import { createServerClient } from '@supabase/ssr'
 import { NextResponse, type NextRequest } from 'next/server'
+import { isAdmin } from '../auth'
 export async function updateSession(request: NextRequest) {
   let supabaseResponse = NextResponse.next({
     request,
@@ -25,13 +26,26 @@ export async function updateSession(request: NextRequest) {
   )
   const { data } = await supabase.auth.getClaims()
   const user = data?.claims
-  if (
-    !user &&
-    !request.nextUrl.pathname.startsWith('/login')
-  ) {
+  const admin = await isAdmin()
+  if (user && (request.nextUrl.pathname.startsWith('/login') || request.nextUrl.pathname.startsWith('/signup'))) {
     const url = request.nextUrl.clone()
-    url.pathname = '/login'
+    url.pathname = '/dashboard'
     return NextResponse.redirect(url)
   }
+
+  if (!user && request.nextUrl.pathname.startsWith('/bookings/payment')) {
+    const url = request.nextUrl.clone()
+    url.pathname = '/login'
+    const callbackUrl = request.nextUrl.pathname + '?' + request.nextUrl.searchParams
+    url.searchParams.set('callbackUrl', callbackUrl)
+    return NextResponse.redirect(url)
+  }
+
+  if (user && !admin && request.nextUrl.pathname.startsWith('/admin')) {
+    const url = request.nextUrl.clone()
+    url.pathname = '/dashboard'
+    return NextResponse.redirect(url)
+  }
+
   return supabaseResponse
 }

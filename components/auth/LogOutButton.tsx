@@ -6,12 +6,12 @@ const LogOutButton = () => {
   const router = useRouter();
   const SignOut = async () => {
     await supabase.auth.signOut();
-    router.replace("/login");
+    router.replace("/");
     router.refresh();
   };
   return (
     <button
-      className="w-[20%] min-w-20 max-w-22.5 h-[50%] rounded-md bg-buttons cursor-pointer text-textPrimary hover:bg-buttonsHover transition"
+      className="w-[40%] min-w-20 sm:max-w-22.5 max-w-40 h-[50%] rounded-md bg-buttons cursor-pointer text-textPrimary hover:bg-buttonsHover transition"
       onClick={SignOut}
     >
       Log out

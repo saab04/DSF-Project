@@ -9,15 +9,13 @@ const DateForm = () => {
   const tomorrow = new Date(today);
   tomorrow.setDate(tomorrow.getDate() + 1);
 
-   const formatDate = (date: Date) => {
+  const formatDate = (date: Date) => {
     return date.toLocaleDateString("sv-SE");
   };
 
   const [checkIn, setCheckIn] = useState(formatDate(today));
   const [checkOut, setCheckOut] = useState(formatDate(tomorrow));
   const [guests, setGuests] = useState(1);
-
- 
 
   const addDays = (date: Date, days: number) => {
     const d = new Date(date);
@@ -34,7 +32,7 @@ const DateForm = () => {
   };
 
   return (
-    <div className="w-[50vw] max-w-150 min-w-70 sm:min-h-85 min-h-100 flex justify-center items-center aspect-9/10 sm:max-h-115 bg-foreground rounded-[20px] shadow-xl text-textPrimary relative">
+    <div className="w-[80vw] max-w-150 min-w-70 min-h-100 flex justify-center items-center bg-foreground rounded-[20px] shadow-xl text-textPrimary relative">
       <form className="w-[80%] aspect-9/10 max-h-90 flex flex-col justify-center items-center sm:mb-0 mb-15 gap-15 relative">
         <div className="w-full h-9.5 sm:h-11 bg-white relative cursor-pointer rounded-md shadow border border-white focus-within:border-primary">
           <label

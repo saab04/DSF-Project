@@ -1,13 +1,18 @@
 import LoginForm from "@/components/auth/LoginForm";
-import { createClient } from "@/lib/supabase/server";
 import { redirect } from "next/navigation";
-const LoginPage = async () => {
+import { createClient } from "@/lib/supabase/server";
+
+interface Props {
+  searchParams: { [key: string]: string | undefined };
+}
+const LoginPage = async ({ searchParams }: Props) => {
   const supabase = await createClient();
   const {
     data: { user },
   } = await supabase.auth.getUser();
+  const callbackUrl = (await searchParams).callbackUrl || "/";
   if (user) {
-    redirect("/dashboard");
+    redirect(callbackUrl);
   }
   return <LoginForm />;
 };

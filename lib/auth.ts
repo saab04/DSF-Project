@@ -35,7 +35,6 @@ export async function SignUp(prevState: {}, formData: FormData) {
         Email: email
     });
 
-    redirect("/dashboard")
     return {}
 }
 
@@ -47,7 +46,7 @@ export async function LogIn(prevState: {}, formData: FormData) {
     const supabase = await createClient();
     const values = {username: username, password: ""}
 
-    const { data: email, error } = await supabase.rpc("get_email_by_username", {name: username});
+    const { data: email, error } = await supabase.rpc("get_email_by_username", {name: username.trim()});
     
     if(error){
         return {err: "Invalid login credentials", values}
@@ -61,8 +60,7 @@ export async function LogIn(prevState: {}, formData: FormData) {
     if (response.error){
         return {err: "Invalid login credentials", values}
     }
-    
-    redirect("/dashboard")
+
     return {}
 }
 

@@ -5,8 +5,9 @@ import Link from "next/link";
 import LogOutButton from "../auth/LogOutButton";
 interface Props {
   name: string;
+  admin: boolean;
 }
-const DropDown = ({ name }: Props) => {
+const DropDown = ({ name, admin }: Props) => {
   const [open, setOpen] = useState(false);
   useEffect(() => {
     const mediaQuery = window.matchMedia("(min-width: 768px)");
@@ -43,10 +44,10 @@ const DropDown = ({ name }: Props) => {
           </li>
           <li className="w-full flex justify-center items-center flex-1">
             <Link
-              href="/dashboard/user"
-              className="flex items-center justify-center w-[20%] min-w-20 max-w-22.5 h-[50%] rounded-md bg-buttons cursor-pointer text-textPrimary hover:bg-buttonsHover transition"
+              href={admin ? "/admin" : "/dashboard/account"}
+              className="flex items-center justify-center w-[40%] min-w-20 sm:max-w-22.5 max-w-40 h-[50%] rounded-md bg-buttons cursor-pointer text-textPrimary hover:bg-buttonsHover transition"
             >
-              Account
+              {admin ? "Admin" : "Account"}
             </Link>
           </li>
         </ul>

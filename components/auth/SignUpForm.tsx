@@ -16,13 +16,13 @@ const SignUpForm = () => {
     showEror();
   }, [state]);
   return (
-    <div className="w-[40vw] max-w-100 min-w-70 flex flex-col aspect-9/10 max-h-112.5 bg-foreground rounded-[20px] shadow-xl text-textPrimary relative">
+    <div className="w-[80vw] max-w-100 flex flex-col aspect-9/10 max-h-110 bg-foreground rounded-[20px] shadow-xl text-textPrimary relative">
       <div className="flex justify-center items-center w-full h-[20%] min-h-12">
         <h2 className="sm:text-[30px] text-[25px]">Sign Up</h2>
       </div>
       <form
         action={action}
-        className="w-full h-[80%] flex flex-wrap justify-center"
+        className="w-full h-[70%] flex flex-wrap justify-center"
       >
         <input
           type="text"
