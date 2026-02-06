@@ -91,7 +91,7 @@ const DateDisplayContent = () => {
             }}
             className="flex justify-center items-center bg-buttons w-[30%] min-w-50 aspect-square"
           >
-            Proceed to payment
+            Verify details and proceed to payment
           </Link>
         </div>
       </div>

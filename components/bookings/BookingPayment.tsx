@@ -9,9 +9,9 @@ const BookingContent = () => {
   const checkIn = searchParams.get("checkIn");
   const checkOut = searchParams.get("checkOut");
   const guests = searchParams.get("guests");
-  const small = searchParams.get("small");
-  const medium = searchParams.get("medium");
-  const large = searchParams.get("large");
+  const small = parseInt(searchParams.get("small") || "0");
+  const medium = parseInt(searchParams.get("medium") || "0");
+  const large = parseInt(searchParams.get("large") || "0");
 
   const [number, setNumber] = useState("");
   const [month, setMonth] = useState("");
@@ -99,117 +99,14 @@ const BookingContent = () => {
           </div>
         </div>
       </div>
-      <div className="w-[90vw] sm:max-w-130 h-170 flex flex-col justify-end items-center bg-foreground rounded-xl shadow-xl relative">
-        <h2 className="text-[30px] absolute top-4 text-center mb-3">Payment</h2>
-        <form className="h-[85%] w-[90%] flex flex-col mb-5">
-          <div className="w-full h-30 flex flex-col justify-center items-start mb-8 sm:mb-0 relative">
-            <label className="absolute top-0 left-0 text-[20px]">
-              Cards Accepted:
-            </label>
-            <div className="flex justify-start items-center flex-wrap w-full sm:min-w-60 max-w-60 sm:max-w-none h-15">
-              <img
-                src="/paypal.png"
-                alt="paypal"
-                width={185}
-                height={127}
-                className="w-22 h-full"
-              ></img>
-              <img
-                src="/visa.png"
-                alt="visa"
-                width={185}
-                height={127}
-                className="w-22 h-full"
-              ></img>
-              <img
-                src="/mastercard.png"
-                alt="mastercard"
-                width={185}
-                height={127}
-                className="w-22 h-full"
-              ></img>
-              <img
-                src="/amex.png"
-                alt="amex"
-                width={185}
-                height={127}
-                className="w-22 h-full"
-              ></img>
-            </div>
-          </div>
-          <div className="w-full flex flex-col justify-end flex-1 relative">
-            <label className="absolute top-0 text-[18px]">Name On Card:</label>
-            <input
-              type="text"
-              placeholder="Sven Svensson"
-              className="w-full h-9.5 rounded-md bg-white px-3 mb-3 sm:h-11 focus:outline-0 shadow"
-            />
-          </div>
-          <div className="w-full flex flex-col justify-end flex-1 relative">
-            <label className="absolute top-0 text-[18px]">
-              Credit Card Number:
-            </label>
-            <input
-              type="text"
-              placeholder="1111 2222 3333 4444"
-              value={number}
-              onChange={(e) => {
-                setNumber(formatCardNumber(handleNumber(e.target.value)));
-              }}
-              maxLength={19}
-              inputMode="numeric"
-              className="w-full h-9.5 rounded-md bg-white px-3 mb-3 sm:h-11 focus:outline-0 shadow"
-            />
-          </div>
-          <div className="w-full flex flex-col justify-end flex-1 relative">
-            <label className="absolute top-0 text-[18px]">Exp. Month:</label>
-            <input
-              type="text"
-              placeholder="June"
-              value={month}
-              onChange={(e) => {
-                setMonth(handleWord(e.target.value));
-              }}
-              maxLength={9}
-              className="w-full h-9.5 rounded-md bg-white px-3 mb-3 sm:h-11 focus:outline-0 shadow"
-            />
-          </div>
-          <div className="w-full flex gap-15 justify-end flex-1">
-            <div className="w-full flex flex-1 flex-col justify-end relative">
-              <label className="absolute top-0 text-[18px]">Exp. Year:</label>
-              <input
-                type="text"
-                placeholder="2026"
-                value={year}
-                onChange={(e) => {
-                  setYear(handleNumber(e.target.value));
-                }}
-                maxLength={4}
-                inputMode="numeric"
-                className="w-full h-9.5 rounded-md bg-white px-3 mb-3 sm:h-11 focus:outline-0 shadow"
-              />
-            </div>
-            <div className="flex flex-1 flex-col justify-end relative">
-              <label className="absolute top-0 text-[18px]">CVV:</label>
-              <input
-                type="password"
-                placeholder="XXX"
-                value={CVV}
-                onChange={(e) => {
-                  setCVV(handleNumber(e.target.value));
-                }}
-                maxLength={3}
-                inputMode="numeric"
-                className="w-full h-9.5 rounded-md bg-white px-3 mb-3 sm:h-11 focus:outline-0 shadow"
-              />
-            </div>
-          </div>
-          <div className="flex-1 flex flex-col justify-end">
-            <button className="w-full h-15 bg-buttons hover:bg-buttonsHover transition rounded-xl cursor-pointer text-[20px]">
-              Confirm payment
-            </button>
-          </div>
-        </form>
+      <div className="flex-1 flex flex-col">
+        <form action="/api/checkout_sessions?bleh" method="POST" className="bg-buttons hover:bg-buttonsHover text-textPrimary px-5 py-2.5 rounded-md cursor-pointer transition-all duration-200 active:scale-95">
+          <section>
+           <button type="submit" role="link">
+              Checkout
+           </button>
+           </section>
+         </form>
       </div>
     </div>
   );
