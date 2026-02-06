@@ -12,7 +12,7 @@ const HomePage = () => {
           <p className="w-[90%]">Make your reservation</p>
         </Link>
       </div>
-      <div className="sm:w-[60vw] w-[90vw] aspect-1920/1280 min-h-47.5 shadow-xl">
+      <div className="sm:w-[60vw] w-[90vw] aspect-1920/1280 min-h-47.5 shadow-xl bg-background rounded-2xl">
         <Slideshow />
       </div>
     </div>

@@ -15,7 +15,7 @@
 
   /* sizeing */
   --header-h: 5rem;
-  --footer-h: 30vh;
+  --footer-h: 30dvh;
 
   /* fonts */
   --fontPrimary: 'Playfair Display', 'serif';
@@ -69,7 +69,7 @@
 
 body {
   display: grid;
-  height: 130vh;
+  min-height: 130dvh;
   overflow-x: hidden;
   grid-template-columns: repeat(3, 1fr);
   grid-template-rows: var(--header-h) auto var(--footer-h);

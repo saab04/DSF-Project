@@ -13,7 +13,7 @@ const Slideshow = () => {
     return () => clearInterval(interval);
   }, []);
   return (
-    <div className="relative w-full h-full">
+    <div className="relative w-full h-full bg-background rounded-2xl">
       {images.map((src, i) => (
         <Image
           key={i}
