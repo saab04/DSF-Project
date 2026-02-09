@@ -1,25 +1,35 @@
 "use client";
 
-import { useSearchParams } from "next/navigation";
-import { Suspense, useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import { availableRooms } from "@/lib/auth";
 
-const DateDisplayContent = () => {
-  const searchParams = useSearchParams();
-  const checkIn = searchParams.get("checkIn");
-  const checkOut = searchParams.get("checkOut");
-  const guests = searchParams.get("guests");
+type Details = {
+  checkIn?: string;
+  checkOut?: string;
+  guests?: string;
+};
+
+const DateDisplay = () => {
+  const [details, setDetails] = useState<Details>({});
+
   const [smallRooms, setSmallRooms] = useState(0);
   const [mediumRooms, setMediumRooms] = useState(0);
   const [largeRooms, setLargeRooms] = useState(0);
 
+  useEffect(() => {
+    const stored = sessionStorage.getItem("details");
+    if (stored) {
+      setDetails(JSON.parse(stored));
+    }
+  }, []);
+
   return (
     <div>
       <div>
-        <p>Arrival date: {checkIn}</p>
-        <p>Departure date: {checkOut}</p>
-        <p>Guests: {guests}</p>
+        <p>Arrival date: {details.checkIn}</p>
+        <p>Departure date: {details.checkOut}</p>
+        <p>Guests: {details.guests}</p>
       </div>
       <button
         className="bg-buttons hover:bg-buttonsHover text-textPrimary px-5 py-2.5 rounded-md cursor-pointer transition-all duration-200 active:scale-95"
@@ -77,17 +87,21 @@ const DateDisplayContent = () => {
         </div>
         <div>
           <Link
-            onClick={(e) => {}}
+            onClick={(e) => {
+              const bookingDetails = {
+                ...details,
+                smallRooms,
+                mediumRooms,
+                largeRooms,
+              };
+              sessionStorage.setItem(
+                "bookingDetails",
+                JSON.stringify(bookingDetails),
+              );
+            }}
             href={{
               pathname: "/bookings/payment",
-              query: {
-                checkIn: checkIn,
-                checkOut: checkOut,
-                guests: guests,
-                small: smallRooms,
-                medium: mediumRooms,
-                large: largeRooms,
-              },
+              query: { ...details, smallRooms, mediumRooms, largeRooms },
             }}
             className="flex justify-center items-center bg-buttons w-[30%] min-w-50 aspect-square"
           >
@@ -102,16 +116,6 @@ const DateDisplayContent = () => {
 const availableRoomhandler = async () => {
   const rooms = await availableRooms();
   console.log(rooms);
-};
-
-const DateDisplay = () => {
-  return (
-    <div>
-      <Suspense fallback={<div>Loading...</div>}>
-        <DateDisplayContent />
-      </Suspense>
-    </div>
-  );
 };
 
 export default DateDisplay;

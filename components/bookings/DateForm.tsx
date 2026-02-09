@@ -119,10 +119,12 @@ const DateForm = () => {
               if (!checkIn || !checkOut || !guests) {
                 e.preventDefault();
               }
+              const details = { checkIn, checkOut, guests };
+              sessionStorage.setItem("details", JSON.stringify(details));
             }}
             href={{
               pathname: "/bookings/rooms",
-              query: { checkIn: checkIn, checkOut: checkOut, guests: guests },
+              query: { checkIn, checkOut, guests },
             }}
             className="flex justify-center items-center bg-buttons w-[30%] min-w-25 h-[120%] min-h-10 text-[20px] rounded-md cursor-pointer hover:bg-buttonsHover transition absolute sm:bottom-0 sm:right-0 sm:top-0 sm:mr-5 top-[250%] m-auto inset-0 disabled"
           >
