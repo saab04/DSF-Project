@@ -29,7 +29,7 @@ export async function updateSession(request: NextRequest) {
   const admin = await isAdmin()
   const url = request.nextUrl.clone()
   if (user && (request.nextUrl.pathname.startsWith('/login') || request.nextUrl.pathname.startsWith('/signup'))) {
-    url.pathname = '/dashboard'
+    url.pathname = '/'
     return NextResponse.redirect(url)
   }
 
@@ -40,8 +40,8 @@ export async function updateSession(request: NextRequest) {
     return NextResponse.redirect(url)
   }
 
-  if (user && !admin && request.nextUrl.pathname.startsWith('/admin')) {
-    url.pathname = '/dashboard'
+  if (!admin && request.nextUrl.pathname.startsWith('/admin')) {
+    url.pathname = '/'
     return NextResponse.redirect(url)
   }
 
