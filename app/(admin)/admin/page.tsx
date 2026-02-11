@@ -7,12 +7,22 @@ import {
 import RoomManager from "@/components/bookings/RoomManager";
 import { BedSingle, BedDouble, Minus, Plus } from "lucide-react";
 const Admin = async () => {
-  const small = await countRooms("Small");
-  const medium = await countRooms("Medium");
-  const large = await countRooms("Large");
-  const bookedSmall = await countBookedRooms("Small");
-  const bookedMedium = await countBookedRooms("Medium");
-  const bookedLarge = await countBookedRooms("Large");
+  const [
+    small,
+    medium,
+    large,
+    bookedSmall,
+    bookedMedium,
+    bookedLarge,
+  ] = await Promise.all([
+    countRooms("Small"),
+    countRooms("Medium"),
+    countRooms("Large"),
+    countBookedRooms("Small"),
+    countBookedRooms("Medium"),
+    countBookedRooms("Large"),
+  ]);
+  
   return (
     <div className="w-[90%] h-full text-textPrimary">
       <div className="w-full h-30 relative">
