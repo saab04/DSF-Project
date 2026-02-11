@@ -1,6 +1,4 @@
 "use server"
-
-import { redirect } from "next/navigation";
 import { createClient } from "./supabase/server"
 
 export async function SignUp(prevState: {}, formData: FormData) {
@@ -96,4 +94,11 @@ export async function availableRooms() {
     }
     return roomTotal
 }
+
+
+
+
+
+
+
 
