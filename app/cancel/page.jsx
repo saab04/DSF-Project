@@ -4,7 +4,7 @@ import { setBookingActiveStatus } from '@/lib/bookings'
 export default async function Cancel({ searchParams }) {
   const { booking_id: bookingId } = await searchParams
   if (bookingId) {
-    await setBookingActiveStatus(bookingId, false)
+    await setBookingActiveStatus(Number(bookingId), false)
   }
 
     return (

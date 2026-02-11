@@ -25,7 +25,7 @@ export async function POST(request) {
     event.type === "checkout.session.async_payment_failed"
   ) {
     const session = event.data.object;
-    const bookingId = session?.metadata?.booking_id;
+    const bookingId = session?.metadata?.booking_id ? Number(session.metadata.booking_id) : null;
 
     if (bookingId) {
       await setBookingActiveStatus(bookingId, false);

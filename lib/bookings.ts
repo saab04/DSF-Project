@@ -48,7 +48,7 @@ export async function createBooking(details: {
 }
 
 export async function setBookingActiveStatus(
-    bookingId: string,
+    bookingId: number,
     isActive: boolean
 ) {
     const supabase = await createClient();
