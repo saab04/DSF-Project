@@ -89,6 +89,7 @@ const BookingPayment = () => {
             </button>
           </section>
         </form>
+        <p>For testing purposes, use card number 4242 4242 4242 4242 for successful payment, and card number 4000 0000 0000 9995 for failed payment.</p>
       </div>
     </div>
   );
