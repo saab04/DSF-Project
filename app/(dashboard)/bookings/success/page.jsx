@@ -21,13 +21,27 @@ export default async function Success({ searchParams }) {
 
   if (status === 'complete') {
     return (
-      <section id="success">
+    <div id="success">
+      <section>
         <p>
           We appreciate your business! A confirmation email will be sent to{' '}
           {customerEmail}. If you have any questions, please email{' '}
         </p>
-        <a href="mailto:orders@example.com">orders@example.com</a>.
-      </section>
+        <a href="mailto:NextBooking@live.se">NextBooking@live.se</a>.
+        </section>
+        <link 
+            href="/"
+            className="flex justify-center items-center bg-buttons w-[30%] min-w-25 h-[120%] min-h-10 text-[20px] rounded-md cursor-pointer hover:bg-buttonsHover transition absolute sm:bottom-0 sm:right-0 sm:top-0 sm:mr-5 top-[250%] m-auto inset-0 disabled"
+            >
+            Back to home
+        </link>
+        <link 
+            href="/dashboard/account"
+            className="flex justify-center items-center bg-buttons w-[30%] min-w-25 h-[120%] min-h-10 text-[20px] rounded-md cursor-pointer hover:bg-buttonsHover transition absolute sm:bottom-0 sm:right-0 sm:top-0 sm:mr-5 top-[350%] m-auto inset-0 disabled"
+            >
+            Your account
+        </link>
+    </div>
     )
   }
 }
