@@ -12,18 +12,20 @@ export default async function Cancel({}) {
         </p>
         <a href="mailto:NextBooking@live.se">NextBooking@live.se</a>.
         </section>
+        <div className="flex flex-row gap-6 mt-8 justify-center">
         <Link 
             href="/"
-            className="w-15 h-15 text-[80px] flex justify-center items-center bg-buttons hover:bg-buttonsHover cursor-pointer transition rounded-xl duration-200 active:scale-95"
+            className="flex text-center justify-center items-center w-[200px] h-[60px] bg-buttons hover:bg-buttonsHover rounded-2xl text-[20px] shadow-xl text-textPrimary transition duration-200 active:scale-95"
             >
             Back to home
         </Link>
         <Link 
             href="/dashboard/account"
-            className="w-15 h-15 text-[80px] flex justify-center items-center bg-buttons hover:bg-buttonsHover cursor-pointer transition rounded-xl duration-200 active:scale-95"
+            className="flex text-center justify-center items-center w-[200px] h-[60px] bg-buttons hover:bg-buttonsHover rounded-2xl text-[20px] shadow-xl text-textPrimary transition duration-200 active:scale-95"
             >
             Your account
         </Link>
+        </div>
     </div>
     )
   }
