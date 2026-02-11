@@ -1,5 +1,5 @@
 import { redirect } from 'next/navigation'
-
+import Link from 'next/link'
 import { stripe } from '@/lib/stripe'
 
 export default async function Success({ searchParams }) {
@@ -29,18 +29,18 @@ export default async function Success({ searchParams }) {
         </p>
         <a href="mailto:NextBooking@live.se">NextBooking@live.se</a>.
         </section>
-        <link 
+        <Link 
             href="/"
-            className="flex justify-center items-center bg-buttons w-[30%] min-w-25 h-[120%] min-h-10 text-[20px] rounded-md cursor-pointer hover:bg-buttonsHover transition absolute sm:bottom-0 sm:right-0 sm:top-0 sm:mr-5 top-[250%] m-auto inset-0 disabled"
+            className="flex justify-flex text-center justify-center items-center w-full h-full absolute hover:bg-buttonsHover rounded-2xl items-center bg-buttons w-[30%] min-w-25 h-[120%] min-h-10 text-[20px] rounded-md cursor-pointer hover:bg-buttonsHover transition absolute sm:bottom-0 sm:right-0 sm:top-0 sm:mr-5 top-[250%] m-auto inset-0 disabled"
             >
             Back to home
-        </link>
-        <link 
+        </Link>
+        <Link 
             href="/dashboard/account"
-            className="flex justify-center items-center bg-buttons w-[30%] min-w-25 h-[120%] min-h-10 text-[20px] rounded-md cursor-pointer hover:bg-buttonsHover transition absolute sm:bottom-0 sm:right-0 sm:top-0 sm:mr-5 top-[350%] m-auto inset-0 disabled"
+            className="flex flex text-center justify-center items-center w-full h-full absolute hover:bg-buttonsHover rounded-2xl-center items-center bg-buttons w-[30%] min-w-25 h-[120%] min-h-10 text-[20px] rounded-md cursor-pointer hover:bg-buttonsHover transition absolute sm:bottom-0 sm:right-0 sm:top-0 sm:mr-5 top-[350%] m-auto inset-0 disabled"
             >
             Your account
-        </link>
+        </Link>
     </div>
     )
   }

@@ -50,8 +50,8 @@ export async function POST(request) {
     const session = await stripe.checkout.sessions.create({
       line_items,
       mode: 'payment',
-      success_url: `${origin}/bookings/success?session_id={CHECKOUT_SESSION_ID}`,
-      cancel_url: `${origin}/bookings/cancel?session_id={CHECKOUT_SESSION_ID}`,
+      success_url: `${origin}/success?session_id={CHECKOUT_SESSION_ID}`,
+      cancel_url: `${origin}/cancel?session_id={CHECKOUT_SESSION_ID}`,
     })
 
     return NextResponse.redirect(session.url, 303)
