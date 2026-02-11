@@ -14,13 +14,13 @@ export default async function Cancel({}) {
         </section>
         <Link 
             href="/"
-            className="flex text-center justify-center items-center w-full h-full absolute hover:bg-buttonsHover rounded-2xl"
+            className="w-15 h-15 text-[80px] flex justify-center items-center bg-buttons hover:bg-buttonsHover cursor-pointer transition rounded-xl duration-200 active:scale-95"
             >
             Back to home
         </Link>
         <Link 
             href="/dashboard/account"
-            className="flex text-center justify-center items-center w-full h-full absolute hover:bg-buttonsHover rounded-2xl justify-center items-center bg-buttons w-[30%] min-w-25 h-[120%] min-h-10 text-[20px] rounded-md cursor-pointer hover:bg-buttonsHover transition absolute sm:bottom-0 sm:right-0 sm:top-0 sm:mr-5 top-[350%] m-auto inset-0 disabled"
+            className="w-15 h-15 text-[80px] flex justify-center items-center bg-buttons hover:bg-buttonsHover cursor-pointer transition rounded-xl duration-200 active:scale-95"
             >
             Your account
         </Link>
