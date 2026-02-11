@@ -1,9 +1,12 @@
-import { redirect } from 'next/navigation'
 import Link from 'next/link'
-import { stripe } from '@/lib/stripe'
+import { setBookingActiveStatus } from '@/lib/bookings'
 
-export default async function Cancel({}) {
-  
+export default async function Cancel({ searchParams }) {
+  const { booking_id: bookingId } = await searchParams
+  if (bookingId) {
+    await setBookingActiveStatus(bookingId, false)
+  }
+
     return (
     <div id="cancel">
       <section>

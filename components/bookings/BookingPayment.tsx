@@ -1,28 +1,77 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, type FormEvent } from "react";
 import { Calendar, User, BedSingle, BedDouble } from "lucide-react";
 
 type Details = {
   checkIn?: string;
   checkOut?: string;
   guests?: string;
-  smallRooms?: string;
-  mediumRooms?: string;
-  largeRooms?: string;
+  smallRooms?: string | number;
+  mediumRooms?: string | number;
+  largeRooms?: string | number;
 };
 
 const BookingPayment = () => {
   const [bookingDetails, setBookingDetails] = useState<Details>({});
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
-  useEffect(() => {
+  const readBookingDetails = () => {
     const stored = sessionStorage.getItem("bookingDetails");
     if (stored) {
-      setBookingDetails(JSON.parse(stored));
+      try {
+        setBookingDetails(JSON.parse(stored));
+        return;
+      } catch {
+        setBookingDetails({});
+      }
     }
+  };
+
+  useEffect(() => {
+    readBookingDetails();
     setLoading(false);
+
+    const handleVisibility = () => {
+      if (document.visibilityState === "visible") {
+        readBookingDetails();
+      }
+    };
+
+    window.addEventListener("focus", readBookingDetails);
+    document.addEventListener("visibilitychange", handleVisibility);
+    return () => {
+      window.removeEventListener("focus", readBookingDetails);
+      document.removeEventListener("visibilitychange", handleVisibility);
+    };
   }, []);
+
+  const getRoomCount = (value?: string | number) => {
+    const parsed = parseInt(String(value ?? "0"), 10);
+    return Number.isFinite(parsed) ? parsed : 0;
+  };
+
+  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+    if (!bookingDetails.checkIn || !bookingDetails.checkOut || !bookingDetails.guests) {
+      event.preventDefault();
+      setError("Please confirm dates and guests before checkout.");
+      return;
+    }
+
+    const totalRooms =
+      getRoomCount(bookingDetails.smallRooms) +
+      getRoomCount(bookingDetails.mediumRooms) +
+      getRoomCount(bookingDetails.largeRooms);
+
+    if (totalRooms <= 0) {
+      event.preventDefault();
+      setError("Please select at least one room before checkout.");
+      return;
+    }
+
+    setError(null);
+  };
 
   if (loading) {
     return <div>Loading...</div>;
@@ -87,16 +136,28 @@ const BookingPayment = () => {
         <form
           action="/api/checkout_sessions"
           method="POST"
-          className="bg-buttons hover:bg-buttonsHover text-textPrimary px-5 py-2.5 rounded-md cursor-pointer transition-all duration-200 active:scale-95"
+          onSubmit={handleSubmit}
+          className="w-full flex justify-center"
         >
-          <input type="hidden" name="smallRooms" value={bookingDetails.smallRooms ?? '0'} />
-          <input type="hidden" name="mediumRooms" value={bookingDetails.mediumRooms ?? '0'} />
-          <input type="hidden" name="largeRooms" value={bookingDetails.largeRooms ?? '0'} />
-          <section>
-            <button type="submit" role="link">Checkout</button>
-          </section>
-          
+          <input type="hidden" name="checkIn" value={String(bookingDetails.checkIn ?? "")} />
+          <input type="hidden" name="checkOut" value={String(bookingDetails.checkOut ?? "")} />
+          <input type="hidden" name="guests" value={String(bookingDetails.guests ?? "0")} />
+          <input type="hidden" name="smallRooms" value={String(bookingDetails.smallRooms ?? "0")} />
+          <input type="hidden" name="mediumRooms" value={String(bookingDetails.mediumRooms ?? "0")} />
+          <input type="hidden" name="largeRooms" value={String(bookingDetails.largeRooms ?? "0")} />
+          <button
+            type="submit"
+            role="link"
+            className="bg-buttons hover:bg-buttonsHover text-textPrimary px-5 py-2.5 rounded-md cursor-pointer transition-all duration-200 active:scale-95"
+          >
+            Checkout
+          </button>
         </form>
+        {error && (
+          <p className="mt-3 text-red-600" role="alert">
+            {error}
+          </p>
+        )}
         <p>For testing purposes: </p>
         <p>card number 4242 4242 4242 4242 for successful payment.</p>
         <p>card number 4000 0000 0000 9995 for failed payment.</p>

@@ -1,7 +1,8 @@
 import { NextResponse } from 'next/server'
 
-
+import { createClient } from '../../../lib/supabase/server'
 import { stripe } from '../../../lib/stripe'
+import { createBooking } from '../../../lib/bookings'
 
 export async function POST(request) {
   try {
@@ -11,6 +12,9 @@ export async function POST(request) {
     let smallRooms = 0
     let mediumRooms = 0
     let largeRooms = 0
+    let checkIn = ''
+    let checkOut = ''
+    let guests = 0
     // simple fallback
 
 
@@ -19,6 +23,9 @@ export async function POST(request) {
       smallRooms = parseInt(formData.get('smallRooms')?.toString() || '0', 10)
       mediumRooms = parseInt(formData.get('mediumRooms')?.toString() || '0', 10)
       largeRooms = parseInt(formData.get('largeRooms')?.toString() || '0', 10)
+      checkIn = formData.get('checkIn')?.toString() || ''
+      checkOut = formData.get('checkOut')?.toString() || ''
+      guests = parseInt(formData.get('guests')?.toString() || '0', 10)
     }
     else {
       // formData kan få cancer, fallback om det inte funkar
@@ -27,6 +34,9 @@ export async function POST(request) {
       smallRooms = parseInt(params.get('smallRooms') || '0', 10)
       mediumRooms = parseInt(params.get('mediumRooms') || '0', 10)
       largeRooms = parseInt(params.get('largeRooms') || '0', 10)
+      checkIn = params.get('checkIn') || ''
+      checkOut = params.get('checkOut') || ''
+      guests = parseInt(params.get('guests') || '0', 10)
       }
 
 
@@ -47,11 +57,41 @@ export async function POST(request) {
       return NextResponse.json({ error: 'No rooms selected' }, { status: 400 })
     }
 
+    if (!checkIn || !checkOut || !Number.isFinite(guests) || guests <= 0) {
+      return NextResponse.json({ error: 'Missing booking details' }, { status: 400 })
+    }
+
+    const supabase = await createClient()
+    const { data: { user }, error: userError } = await supabase.auth.getUser()
+    if (userError || !user) {
+      return NextResponse.json({ error: 'Not authenticated' }, { status: 401 })
+    }
+
+    const { id: bookingId, error: bookingError } = await createBooking({
+      userId: user.id,
+      checkIn,
+      checkOut,
+      guests,
+      smallRooms,
+      mediumRooms,
+      largeRooms,
+    })
+
+    if (bookingError || !bookingId) {
+      return NextResponse.json(
+        { error: bookingError || 'Booking insert failed' },
+        { status: 500 }
+      )
+    }
+
     const session = await stripe.checkout.sessions.create({
       line_items,
       mode: 'payment',
+      metadata: {
+        booking_id: bookingId,
+      },
       success_url: `${origin}/success?session_id={CHECKOUT_SESSION_ID}`,
-      cancel_url: `${origin}/cancel?session_id={CHECKOUT_SESSION_ID}`,
+      cancel_url: `${origin}/cancel?session_id={CHECKOUT_SESSION_ID}&booking_id=${bookingId}`,
     })
 
     return NextResponse.redirect(session.url, 303)

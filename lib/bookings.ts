@@ -19,6 +19,49 @@ export async function addRooms(roomType: string) {
     }
 }
 
+export async function createBooking(details: {
+    userId: string;
+    checkIn: string;
+    checkOut: string;
+    guests: number;
+    smallRooms: number;
+    mediumRooms: number;
+    largeRooms: number;
+}) {
+    const supabase = await createClient();
+    const { data, error } = await supabase.from("Bookings").insert({
+        UserID: details.userId,
+        StartDate: details.checkIn,
+        StopDate: details.checkOut,
+        GuestAmmount: details.guests,
+        RoomAmmount_Small: details.smallRooms,
+        RoomAmmount_Medium: details.mediumRooms,
+        RoomAmmount_Large: details.largeRooms,
+        Active_Booking: true,
+    }).select("id").single();
+
+    if (error) {
+        return { error: error.message };
+    }
+
+    return { id: data?.id };
+}
+
+export async function setBookingActiveStatus(
+    bookingId: string,
+    isActive: boolean
+) {
+    const supabase = await createClient();
+    const { error } = await supabase
+        .from("Bookings")
+        .update({ Active_Booking: isActive })
+        .eq("id", bookingId);
+
+    if (error) {
+        return error.message;
+    }
+}
+
 export async function removeRooms(roomType: string) {
     const supabase = await createClient();
     const { data, error } = await supabase.rpc("remove_rooms", {roomtype: roomType});
