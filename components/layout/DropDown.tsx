@@ -44,7 +44,7 @@ const DropDown = ({ name, admin }: Props) => {
           </li>
           <li className="w-full flex justify-center items-center flex-1">
             <Link
-              href={admin ? "/admin" : "/dashboard/account"}
+              href={admin ? "/admin" : "/dashboard"}
               className="flex items-center justify-center w-[40%] min-w-20 sm:max-w-22.5 max-w-40 h-[50%] rounded-md bg-buttons cursor-pointer text-textPrimary hover:bg-buttonsHover transition"
             >
               {admin ? "Admin" : "Account"}

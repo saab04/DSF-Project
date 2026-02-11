@@ -23,7 +23,7 @@ export default async function Cancel({ searchParams }) {
             Back to home
         </Link>
         <Link 
-            href="/dashboard/account"
+            href="/dashboard"
             className="flex text-center justify-center items-center w-[200px] h-[60px] bg-buttons hover:bg-buttonsHover rounded-2xl text-[20px] shadow-xl text-textPrimary transition duration-200 active:scale-95"
             >
             Your account

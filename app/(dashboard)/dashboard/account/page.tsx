@@ -1,9 +1,5 @@
-const UserPage = () => {
-  return (
-    <div>
-      <div></div>
-    </div>
-  );
-};
+import { redirect } from 'next/navigation'
 
-export default UserPage;
+export default function AccountPage() {
+  redirect('/dashboard')
+}

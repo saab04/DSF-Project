@@ -98,3 +98,25 @@ export async function countBookedRooms(roomType: string) {
     }
     return count;
 }
+
+export async function getUserActiveBookings() {
+    const supabase = await createClient();
+    const { data: { user }, error: userError } = await supabase.auth.getUser();
+    
+    if (userError || !user) {
+        return { error: "Not authenticated", bookings: [] };
+    }
+
+    const { data: bookings, error } = await supabase
+        .from("Bookings")
+        .select("*")
+        .eq("UserID", user.id)
+        .eq("Active_Booking", true)
+        .order("StartDate", { ascending: true });
+
+    if (error) {
+        return { error: error.message, bookings: [] };
+    }
+
+    return { bookings: bookings || [], error: null };
+}
