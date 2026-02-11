@@ -1,6 +1,7 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
+import { LoaderCircle } from "lucide-react";
 
 interface Props {
   roomType: string;
@@ -23,6 +24,7 @@ const RoomManager = ({
   countBooked,
   addFunction,
 }: Props) => {
+  const [loading, setLoading] = useState(false);
   const [available, setAvailable] = useState(count);
   return (
     <div className="sm:w-[70%] w-[90%] sm:min-w-125 min-h-30 bg-foreground shadow rounded-md mb-5 flex flex-wrap">
@@ -39,34 +41,44 @@ const RoomManager = ({
           <button
             className="w-15 h-15 text-[80px] flex justify-center items-center bg-buttons hover:bg-buttonsHover cursor-pointer transition rounded-xl duration-200 active:scale-95"
             onClick={async () => {
+              setLoading(true);
               const error = await removeFunction(roomType);
               if (error) {
                 alert(error);
+                setLoading(false);
                 return;
               }
               setAvailable((prev: number) =>
                 prev > countBooked ? prev - 1 : prev,
               );
+              setLoading(false);
             }}
+            disabled={loading}
           >
             {remove}
           </button>
         </div>
         <div className="flex-1 flex justify-center items-center">
           <p className="absolute top-2">Available</p>
-          <p className="text-[20px]">{available}</p>
+          <p className="text-[20px]">
+            {loading ? <LoaderCircle className="animate-spin" /> : available}
+          </p>
         </div>
         <div className="flex-1 flex justify-start items-center">
           <button
             className="w-15 h-15 text-[80px] flex justify-center items-center bg-buttons hover:bg-buttonsHover cursor-pointer transition rounded-xl duration-200 active:scale-95"
             onClick={async () => {
+              setLoading(true);
               const error = await addFunction(roomType);
               if (error) {
                 alert(error);
+                setLoading(false);
                 return;
               }
               setAvailable((prev: number) => prev + 1);
+              setLoading(false);
             }}
+            disabled={loading}
           >
             {add}
           </button>
