@@ -14,13 +14,19 @@ type Details = {
 
 const BookingPayment = () => {
   const [bookingDetails, setBookingDetails] = useState<Details>({});
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const stored = sessionStorage.getItem("bookingDetails");
     if (stored) {
       setBookingDetails(JSON.parse(stored));
     }
+    setLoading(false);
   }, []);
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <div className="w-[90%] h-full flex flex-col justify-center items-center gap-15 text-textPrimary">
@@ -79,17 +85,21 @@ const BookingPayment = () => {
       </div>
       <div className="flex-1 flex flex-col">
         <form
-          action="/api/checkout_sessions?bleh"
+          action="/api/checkout_sessions"
           method="POST"
           className="bg-buttons hover:bg-buttonsHover text-textPrimary px-5 py-2.5 rounded-md cursor-pointer transition-all duration-200 active:scale-95"
         >
+          <input type="hidden" name="smallRooms" value={bookingDetails.smallRooms ?? '0'} />
+          <input type="hidden" name="mediumRooms" value={bookingDetails.mediumRooms ?? '0'} />
+          <input type="hidden" name="largeRooms" value={bookingDetails.largeRooms ?? '0'} />
           <section>
-            <button type="submit" role="link">
-              Checkout
-            </button>
+            <button type="submit" role="link">Checkout</button>
           </section>
+          
         </form>
-        <p>For testing purposes, use card number 4242 4242 4242 4242 for successful payment, and card number 4000 0000 0000 9995 for failed payment.</p>
+        <p>For testing purposes: </p>
+        <p>card number 4242 4242 4242 4242 for successful payment.</p>
+        <p>card number 4000 0000 0000 9995 for failed payment.</p>
       </div>
     </div>
   );
