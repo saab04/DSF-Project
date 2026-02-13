@@ -66,7 +66,7 @@ const HomePage = () => {
         <div className="relative z-10 flex flex-col items-center text-center text-foreground px-6">
           <h2 className="text-4xl sm:text-5xl font-bold">Train with us!</h2>
           <a
-            href="https://google.com" //replace with gym booking page later
+            href="https://skolprojekt.vercel.app/"
             className="mt-6 inline-flex items-center justify-center rounded-full bg-buttons px-8 py-4 text-lg font-bold text-textPrimary shadow-xl transition-colors hover:bg-buttonsHover"
           >
             Book training sessions with our gym
