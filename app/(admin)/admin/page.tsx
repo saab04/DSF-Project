@@ -2,7 +2,7 @@ import {
   addRooms,
   countRooms,
   removeRooms,
-  countBookedRooms,
+  countBookedRoomAIO,
   getAllActiveBookings,
 } from "@/lib/bookings";
 import RoomManager from "@/components/bookings/RoomManager";
@@ -13,19 +13,26 @@ const Admin = async () => {
     small,
     medium,
     large,
-    bookedSmall,
-    bookedMedium,
-    bookedLarge,
+    bookedTotals,
     allBookings,
   ] = await Promise.all([
     countRooms("Small"),
     countRooms("Medium"),
     countRooms("Large"),
-    countBookedRooms("Small"),
-    countBookedRooms("Medium"),
-    countBookedRooms("Large"),
+    countBookedRoomAIO(),
     getAllActiveBookings(),
   ]);
+
+  const totals =
+    typeof bookedTotals === "string"
+      ? {
+          totalbooked_small: 0,
+          totalbooked_medium: 0,
+          totalbooked_large: 0,
+        }
+      : bookedTotals;
+
+  const { totalbooked_small, totalbooked_medium, totalbooked_large } = totals;
 
   const bookings = allBookings?.bookings;
   return (
@@ -43,7 +50,7 @@ const Admin = async () => {
             add={<Plus size={40} color="var(--textPrimary)" />}
             removeFunction={removeRooms}
             count={small}
-            countBooked={bookedSmall}
+            countBooked={totalbooked_small}
             addFunction={addRooms}
           />
           <RoomManager
@@ -53,7 +60,7 @@ const Admin = async () => {
             add={<Plus size={40} color="var(--textPrimary)" />}
             removeFunction={removeRooms}
             count={medium}
-            countBooked={bookedMedium}
+            countBooked={totalbooked_medium}
             addFunction={addRooms}
           />
           <RoomManager
@@ -63,7 +70,7 @@ const Admin = async () => {
             add={<Plus size={40} color="var(--textPrimary)" />}
             removeFunction={removeRooms}
             count={large}
-            countBooked={bookedLarge}
+            countBooked={totalbooked_large}
             addFunction={addRooms}
           />
         </div>

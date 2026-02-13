@@ -85,7 +85,7 @@ export async function countRooms(roomType: string) {
     return count;
 }
 
-export async function countBookedRooms(roomType: string) {
+export async function countBookedRoomType(roomType: string) {
     const supabase = await createClient();
     
     const {count, error} = await supabase
@@ -98,6 +98,35 @@ export async function countBookedRooms(roomType: string) {
         return error.message;
     }
     return count;
+}
+
+export async function countBookedRoomAIO() {
+    const supabase = await createClient();
+
+    const { data, error } = await supabase
+        .from("Bookings")
+        .select("RoomAmmount_Small, RoomAmmount_Medium, RoomAmmount_Large")
+        .eq("Active_Booking", true);
+
+    if (error) {
+        return error.message;
+    }
+
+    const totals = (data || []).reduce(
+        (acc, booking) => {
+            acc.totalbooked_small += booking.RoomAmmount_Small ?? 0;
+            acc.totalbooked_medium += booking.RoomAmmount_Medium ?? 0;
+            acc.totalbooked_large += booking.RoomAmmount_Large ?? 0;
+            return acc;
+        },
+        {
+            totalbooked_small: 0,
+            totalbooked_medium: 0,
+            totalbooked_large: 0,
+        },
+    );
+
+    return totals;
 }
 
 export async function getUserActiveBookings() {
