@@ -13,7 +13,7 @@ const Slideshow = () => {
     return () => clearInterval(interval);
   }, []);
   return (
-    <div className="relative w-full h-full bg-background rounded-2xl">
+    <div className="relative w-full h-full">
       {images.map((src, i) => (
         <Image
           key={i}
@@ -22,7 +22,7 @@ const Slideshow = () => {
           width={1920}
           height={1280}
           priority={true}
-          className={`absolute w-full h-full object-cover transition-opacity duration-2000 shadow-2xl rounded-2xl ${
+          className={`absolute w-full h-full object-cover transition-opacity duration-2000 ${
             i === index ? "opacity-100 fade-in" : "opacity-0"
           }`}
         />
