@@ -26,7 +26,7 @@ const DropDown = ({ name, admin }: Props) => {
     };
   }, []);
   return (
-    <div className="sm:hidden flex items-center w-full h-full absolute z-2">
+    <div className="sm:hidden flex items-center w-full h-full absolute z-50">
       <button
         onClick={() => setOpen((prev) => !prev)}
         className="flex justify-center items-center w-9 h-9 absolute right-3 cursor-pointer"
