@@ -27,7 +27,7 @@ const RoomManager = ({
   const [loading, setLoading] = useState(false);
   const [available, setAvailable] = useState(count);
   return (
-    <div className="sm:w-[70%] w-[90%] sm:min-w-125 min-h-30 bg-foreground shadow rounded-md mb-5 flex flex-wrap">
+    <div className="sm:w-[70%] w-[90%] sm:min-w-125 min-w-full min-h-30 bg-foreground shadow rounded-md mb-5 flex flex-wrap">
       <div className="sm:w-[50%] w-full min-w-62.5 min-h-30 flex justify-center items-center">
         <div className="h-full flex justify-center items-center aspect-square">
           {icon}

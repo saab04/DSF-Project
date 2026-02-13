@@ -3,8 +3,10 @@ import {
   countRooms,
   removeRooms,
   countBookedRooms,
+  getAllActiveBookings,
 } from "@/lib/bookings";
 import RoomManager from "@/components/bookings/RoomManager";
+import BookingDisplay from "@/components/bookings/BookingDisplay";
 import { BedSingle, BedDouble, Minus, Plus } from "lucide-react";
 const Admin = async () => {
   const [
@@ -14,6 +16,7 @@ const Admin = async () => {
     bookedSmall,
     bookedMedium,
     bookedLarge,
+    allBookings,
   ] = await Promise.all([
     countRooms("Small"),
     countRooms("Medium"),
@@ -21,10 +24,12 @@ const Admin = async () => {
     countBookedRooms("Small"),
     countBookedRooms("Medium"),
     countBookedRooms("Large"),
+    getAllActiveBookings(),
   ]);
-  
+
+  const bookings = allBookings?.bookings;
   return (
-    <div className="w-[90%] h-full text-textPrimary">
+    <div className="sm:w-[90%] w-[90vw] h-full text-textPrimary">
       <div className="w-full h-30 relative">
         <h1 className="absolute left-0 top-10 text-[35px]">Admin View</h1>
       </div>
@@ -65,7 +70,11 @@ const Admin = async () => {
       </div>
       <div className="w-full min-h-[50vh] flex flex-col gap-3">
         <h2 className="h-10 text-[25px] text-center">Manage active bookings</h2>
-        <div className="flex-1 flex flex-col justify-start"></div>
+        <div className="flex-1 flex flex-col justify-start items-center">
+          {bookings?.map((booking: any) => (
+            <BookingDisplay booking={booking} key={booking.id} />
+          ))}
+        </div>
       </div>
     </div>
   );

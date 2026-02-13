@@ -1,5 +1,6 @@
 "use server"
 import { createClient } from "./supabase/server"
+import { isAdmin } from "./auth";
 export async function addRooms(roomType: string) {
     const supabase = await createClient();
     const count = await countRooms(roomType);
@@ -120,3 +121,24 @@ export async function getUserActiveBookings() {
 
     return { bookings: bookings || [], error: null };
 }
+
+export async function getAllActiveBookings() {
+    const supabase = await createClient();
+    const admin = await isAdmin();
+    if(!admin){
+        return;
+    }
+    const { data: bookings, error } = await supabase
+        .from("Bookings")
+        .select("*")
+        .eq("Active_Booking", true)
+        .order("StartDate", { ascending: true });
+    
+    if (error) {
+        return { error: error.message, bookings: [] };
+    }
+
+    return { bookings: bookings || [], error: null };
+}
+
+

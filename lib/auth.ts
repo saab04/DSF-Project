@@ -72,7 +72,7 @@ export async function isAdmin() {
     const supabase = await createClient();
     const {data: isAdmin, error} = await supabase.rpc("is_admin");
     if(error){
-        console.log("Not Authorized")
+        return;
     }
     return isAdmin;
 }
@@ -80,7 +80,7 @@ export async function isAdmin() {
 export async function availableRooms() {
     const supabase = await createClient();
     const { data: roomsize, error } = await supabase.rpc("get_rooms");
-    var roomTotal = {Small: 0, Medium: 0, Large: 0};
+    let roomTotal = {Small: 0, Medium: 0, Large: 0};
     if (error) {
         console.log("No available rooms");
     }
