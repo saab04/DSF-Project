@@ -27,28 +27,28 @@ const HomePage = () => {
       </section>
 
       <section className="w-full bg-black/10">
-        <div className="mx-auto flex w-full max-w-6xl flex-wrap items-center justify-center gap-6 px-6 py-6 text-foreground sm:gap-10 sm:py-8">
+        <div className="mx-auto flex w-full max-w-6xl flex-wrap items-center justify-center gap-6 px-6 py-6 text-black sm:gap-10 sm:py-8">
           <div className="flex items-center gap-3">
-            <Wifi className="h-6 w-6" aria-hidden="true" />
-            <span className="text-sm font-semibold uppercase tracking-wide">
+            <Wifi className="h-6 w-6 text-black" aria-hidden="true" />
+            <span className="text-sm font-semibold uppercase tracking-wide text-black">
               Free Wi-Fi
             </span>
           </div>
           <div className="flex items-center gap-3">
-            <Coffee className="h-6 w-6" aria-hidden="true" />
-            <span className="text-sm font-semibold uppercase tracking-wide">
+            <Coffee className="h-6 w-6 text-black" aria-hidden="true" />
+            <span className="text-sm font-semibold uppercase tracking-wide text-black">
               Breakfast
             </span>
           </div>
           <div className="flex items-center gap-3">
-            <Car className="h-6 w-6" aria-hidden="true" />
-            <span className="text-sm font-semibold uppercase tracking-wide">
+            <Car className="h-6 w-6 text-black" aria-hidden="true" />
+            <span className="text-sm font-semibold uppercase tracking-wide text-black">
               Parking
             </span>
           </div>
           <div className="flex items-center gap-3">
-            <Dumbbell className="h-6 w-6" aria-hidden="true" />
-            <span className="text-sm font-semibold uppercase tracking-wide">
+            <Dumbbell className="h-6 w-6 text-black" aria-hidden="true" />
+            <span className="text-sm font-semibold uppercase tracking-wide text-black">
               Gym Access
             </span>
           </div>
