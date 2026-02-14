@@ -87,17 +87,33 @@ export async function countRooms(roomType: string) {
 
 export async function countBookedRoomType(roomType: string) {
     const supabase = await createClient();
-    
-    const {count, error} = await supabase
-    .from("Rooms")
-    .select("*", { count: "exact", head: true })
-    .eq("RoomSize", roomType)
-    .eq("IsOccupied", true);
+
+    const roomColumnByType = {
+        Small: "RoomAmmount_Small",
+        Medium: "RoomAmmount_Medium",
+        Large: "RoomAmmount_Large",
+    } as const;
+
+    const roomColumn = roomColumnByType[roomType as keyof typeof roomColumnByType];
+    if (!roomColumn) {
+        return "Invalid room type";
+    }
+
+    const { data, error } = await supabase
+        .from("Bookings")
+        .select(roomColumn)
+        .eq("Active_Booking", true);
 
     if (error) {
         return error.message;
     }
-    return count;
+
+    const totalBooked = (data || []).reduce((acc, booking) => {
+        const value = (booking as Record<string, number>)?.[roomColumn] ?? 0;
+        return acc + (typeof value === "number" ? value : 0);
+    }, 0);
+
+    return totalBooked;
 }
 
 export async function countBookedRoomAIO() {
