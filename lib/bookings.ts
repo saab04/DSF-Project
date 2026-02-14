@@ -129,6 +129,40 @@ export async function countBookedRoomAIO() {
     return totals;
 }
 
+export async function getAvailableRoomCounts() {
+    const [smallTotal, mediumTotal, largeTotal, bookedTotals] = await Promise.all([
+        countRooms("Small"),
+        countRooms("Medium"),
+        countRooms("Large"),
+        countBookedRoomAIO(),
+    ]);
+
+    if (typeof smallTotal === "string") {
+        return { error: smallTotal };
+    }
+    if (typeof mediumTotal === "string") {
+        return { error: mediumTotal };
+    }
+    if (typeof largeTotal === "string") {
+        return { error: largeTotal };
+    }
+    if (typeof bookedTotals === "string") {
+        return { error: bookedTotals };
+    }
+
+    if (smallTotal === null || mediumTotal === null || largeTotal === null) {
+        return { error: "Failed to retrieve room counts" };
+    }
+
+    return {
+        available: {
+            small: Math.max(0, smallTotal - bookedTotals.totalbooked_small),
+            medium: Math.max(0, mediumTotal - bookedTotals.totalbooked_medium),
+            large: Math.max(0, largeTotal - bookedTotals.totalbooked_large),
+        },
+    };
+}
+
 export async function getUserActiveBookings() {
     const supabase = await createClient();
     const { data: { user }, error: userError } = await supabase.auth.getUser();

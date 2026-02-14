@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@400;700&family=Work+Sans:wght@400;500;600;700&display=swap");
 @import "tailwindcss";
 
 :root {
@@ -13,12 +14,13 @@
   --buttons-hover: #a67c3d;
   --header-footer-text: #A7B9D7;
 
-  /* sizeing */
+  /* sizing */
   --header-h: 5rem;
   --footer-h: 30dvh;
 
   /* fonts */
-  --fontPrimary: 'Playfair Display', 'serif';
+  --fontPrimary: "Work Sans", sans-serif;
+  --fontHeading: "Libre Baskerville", serif;
 
 
 }
@@ -35,6 +37,7 @@
   --color-textHF: var(--header-footer-text);
 
   --font-primary: var(--fontPrimary);
+  --font-heading: var(--fontHeading);
 
 }
 
@@ -63,6 +66,15 @@
 * {
   box-sizing: border-box;
   font-family: var(--fontPrimary);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--fontHeading);
 }
 
 /* grid */
