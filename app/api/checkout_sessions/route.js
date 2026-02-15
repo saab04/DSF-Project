@@ -2,10 +2,13 @@ import { NextResponse } from 'next/server'
 
 import { createClient } from '../../../lib/supabase/server'
 import { stripe } from '../../../lib/stripe'
-import { createBooking } from '../../../lib/bookings'
+import { createBooking, getAvailableRoomCounts } from '../../../lib/bookings'
 
 export async function POST(request) {
   try {
+    const delayMs = 150 + Math.floor(Math.random() * 300)
+    await new Promise((resolve) => setTimeout(resolve, delayMs))
+
     const headersList = request.headers
     const origin = headersList.get('origin') || headersList.get('referer')
 
@@ -59,6 +62,20 @@ export async function POST(request) {
 
     if (!checkIn || !checkOut || !Number.isFinite(guests) || guests <= 0) {
       return NextResponse.json({ error: 'Missing booking details' }, { status: 400 })
+    }
+
+    const availabilityResult = await getAvailableRoomCounts()
+    if ('error' in availabilityResult) {
+      return NextResponse.json({ error: 'Could not verify availability' }, { status: 503 })
+    }
+
+    const { available } = availabilityResult
+    if (
+      smallRooms > available.small ||
+      mediumRooms > available.medium ||
+      largeRooms > available.large
+    ) {
+      return NextResponse.json({ error: 'Insufficient availability' }, { status: 409 })
     }
 
     const supabase = await createClient()
