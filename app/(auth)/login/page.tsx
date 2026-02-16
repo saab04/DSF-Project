@@ -1,4 +1,4 @@
-import LoginForm from "@/components/auth/LoginForm";
+import FormDisplay from "@/components/auth/FormDisplay";
 import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
 
@@ -14,7 +14,7 @@ const LoginPage = async ({ searchParams }: Props) => {
   if (user) {
     redirect(callbackUrl);
   }
-  return <LoginForm />;
+  return <FormDisplay />;
 };
 
 export default LoginPage;

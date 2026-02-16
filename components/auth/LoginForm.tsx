@@ -1,7 +1,6 @@
 "use client";
 
 import { LogIn } from "@/lib/auth";
-import Link from "next/link";
 import { LoaderCircle } from "lucide-react";
 import { useActionState, useEffect, useState } from "react";
 const LoginForm = () => {
@@ -57,12 +56,6 @@ const LoginForm = () => {
         >
           {state?.err}
         </p>
-      </div>
-      <div className="absolute top-[calc(100%+10px)] text-textPrimary w-full flex justify-center gap-2 text-[14px] sm:text-[16px]">
-        <p>Dont have an account?</p>
-        <Link href="/signup" className="text-blue-700">
-          Sign up
-        </Link>
       </div>
     </div>
   );

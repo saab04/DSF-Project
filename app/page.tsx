@@ -4,7 +4,7 @@ import Link from "next/link";
 
 const HomePage = () => {
   return (
-    <div className="w-full -m-5 flex flex-col">
+    <div className="w-full flex flex-col">
       <section className="relative w-full min-h-[calc(100dvh-var(--header-h))]">
         <div className="absolute inset-0">
           <Slideshow />

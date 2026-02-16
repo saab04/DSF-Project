@@ -53,7 +53,11 @@ const BookingPayment = () => {
   };
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
-    if (!bookingDetails.checkIn || !bookingDetails.checkOut || !bookingDetails.guests) {
+    if (
+      !bookingDetails.checkIn ||
+      !bookingDetails.checkOut ||
+      !bookingDetails.guests
+    ) {
       event.preventDefault();
       setError("Please confirm dates and guests before checkout.");
       return;
@@ -85,12 +89,14 @@ const BookingPayment = () => {
     <div className="min-h-screen flex flex-col items-center justify-center px-6 py-10 text-[1.15rem] text-textPrimary">
       <div className="w-full max-w-4xl flex flex-col items-center gap-6">
         <div className="text-center space-y-2">
-          <p className="text-sm uppercase tracking-wide text-textPrimary">Booking details</p>
+          <p className="text-sm uppercase tracking-wide text-textPrimary">
+            Booking details
+          </p>
           <h1 className="text-3xl font-semibold">Review and pay</h1>
           <p className="text-base">Confirm your reservation before checkout.</p>
         </div>
         <div className="w-full flex flex-wrap justify-center gap-6 rounded-xl border border-gray-300 bg-foreground p-6 shadow">
-          <div className="min-w-[240px] flex-1 flex flex-col gap-3">
+          <div className="min-w-60 flex-1 flex flex-col gap-3">
             <p className="text-lg font-semibold">Dates and guests</p>
             <div className="flex items-center gap-2">
               <Calendar size={18} color="var(--textPrimary)" />
@@ -108,7 +114,7 @@ const BookingPayment = () => {
               <p>{bookingDetails.guests}</p>
             </div>
           </div>
-          <div className="min-w-[240px] flex-1 flex flex-col gap-3">
+          <div className="min-w-60 flex-1 flex flex-col gap-3">
             <p className="text-lg font-semibold">Room selections</p>
             <div className="flex items-center gap-2">
               <BedSingle size={18} color="var(--textPrimary)" />
@@ -133,12 +139,36 @@ const BookingPayment = () => {
           onSubmit={handleSubmit}
           className="w-full flex flex-col items-center gap-3"
         >
-          <input type="hidden" name="checkIn" value={String(bookingDetails.checkIn ?? "")} />
-          <input type="hidden" name="checkOut" value={String(bookingDetails.checkOut ?? "")} />
-          <input type="hidden" name="guests" value={String(bookingDetails.guests ?? "0")} />
-          <input type="hidden" name="smallRooms" value={String(bookingDetails.smallRooms ?? "0")} />
-          <input type="hidden" name="mediumRooms" value={String(bookingDetails.mediumRooms ?? "0")} />
-          <input type="hidden" name="largeRooms" value={String(bookingDetails.largeRooms ?? "0")} />
+          <input
+            type="hidden"
+            name="checkIn"
+            value={String(bookingDetails.checkIn ?? "")}
+          />
+          <input
+            type="hidden"
+            name="checkOut"
+            value={String(bookingDetails.checkOut ?? "")}
+          />
+          <input
+            type="hidden"
+            name="guests"
+            value={String(bookingDetails.guests ?? "0")}
+          />
+          <input
+            type="hidden"
+            name="smallRooms"
+            value={String(bookingDetails.smallRooms ?? "0")}
+          />
+          <input
+            type="hidden"
+            name="mediumRooms"
+            value={String(bookingDetails.mediumRooms ?? "0")}
+          />
+          <input
+            type="hidden"
+            name="largeRooms"
+            value={String(bookingDetails.largeRooms ?? "0")}
+          />
           <button
             type="submit"
             role="link"

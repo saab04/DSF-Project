@@ -4,6 +4,6 @@ export async function proxy(request: NextRequest) {
   return await updateSession(request)
 }
 export const config = {
-  matcher: [ "/login", "/signup", "/bookings/payment", "/admin"
+  matcher: [ "/login", "/bookings/payment", "/admin"
   ]
 }
