@@ -23,7 +23,9 @@ const DateDisplay = () => {
   const [mediumRooms, setMediumRooms] = useState(0);
   const [largeRooms, setLargeRooms] = useState(0);
   const [availability, setAvailability] = useState<Availability | null>(null);
-  const [availabilityError, setAvailabilityError] = useState<string | null>(null);
+  const [availabilityError, setAvailabilityError] = useState<string | null>(
+    null,
+  );
   const [isCheckingAvailability, setIsCheckingAvailability] = useState(false);
 
   useEffect(() => {
@@ -61,12 +63,16 @@ const DateDisplay = () => {
   const canProceed = availability && !availabilityError && !exceedsAvailability;
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center px-6 py-10 text-[1.15rem]">
+    <div className="h-full flex flex-col items-center justify-center px-6 py-10 text-[1.15rem]">
       <div className="w-full max-w-4xl flex flex-col items-center gap-6">
         <div className="text-center space-y-2">
-          <p className="text-sm uppercase tracking-wide text-textPrimary">Booking details</p>
+          <p className="text-sm uppercase tracking-wide text-textPrimary">
+            Booking details
+          </p>
           <h1 className="text-3xl font-semibold">Choose your rooms</h1>
-          <p className="text-base">Review your dates and select room quantities.</p>
+          <p className="text-base">
+            Review your dates and select room quantities.
+          </p>
         </div>
         <div className="text-center space-y-1">
           <p>Arrival date: {details.checkIn}</p>
@@ -78,7 +84,9 @@ const DateDisplay = () => {
           onClick={loadAvailability}
           disabled={isCheckingAvailability}
         >
-          {isCheckingAvailability ? "Checking availability..." : "Refresh availability"}
+          {isCheckingAvailability
+            ? "Checking availability..."
+            : "Refresh availability"}
         </button>
         {availabilityError ? (
           <div className="w-full rounded-md border border-red-300 bg-red-100 px-4 py-3 text-red-700 text-center">
@@ -125,8 +133,8 @@ const DateDisplay = () => {
         <div className="w-full flex justify-center">
           {exceedsAvailability ? (
             <div className="rounded-md border border-red-300 bg-red-100 px-4 py-3 text-red-700 text-center">
-              You have selected more rooms than currently available, please change
-              your selection of rooms
+              You have selected more rooms than currently available, please
+              change your selection of rooms
             </div>
           ) : canProceed ? (
             <Link
