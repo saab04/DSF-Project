@@ -65,12 +65,49 @@ export async function setBookingActiveStatus(
 
 export async function removeRooms(roomType: string) {
     const supabase = await createClient();
-    const { data, error } = await supabase.rpc("remove_rooms", {roomtype: roomType});
-    if (data.length === 0 || error) {
-        return "Cannot remove booked rooms";
+    
+
+    const totalCount = await countRooms(roomType);
+    if (typeof totalCount === "string") {
+        return totalCount; // Error message
+    }
+    if (totalCount === null) {
+        return "Failed to retrieve room count";
     }
 
+    const bookedCount = await countBookedRoomType(roomType);
+    if (typeof bookedCount === "string") {
+        return bookedCount; // Error message
+    }
+    
+    if (totalCount <= bookedCount) {
+        return "Cannot remove room: all rooms of this type are currently booked";
+    }
+    
+    const { data: rooms, error: fetchError } = await supabase
+        .from("Rooms")
+        .select("id")
+        .eq("RoomSize", roomType)
+        .limit(1);
+    
+    if (fetchError) {
+        return fetchError.message;
+    }
+    
+    if (!rooms || rooms.length === 0) {
+        return "No rooms of this type found";
+    }
+    
+    const { error: deleteError } = await supabase
+        .from("Rooms")
+        .delete()
+        .eq("id", rooms[0].id);
+    
+    if (deleteError) {
+        return deleteError.message;
+    }
 }
+
 export async function countRooms(roomType: string) {
     const supabase = await createClient();
     
