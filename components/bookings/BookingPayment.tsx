@@ -86,7 +86,7 @@ const BookingPayment = () => {
   }
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center px-6 py-10 text-[1.15rem] text-textPrimary">
+    <div className="h-full flex flex-col items-center justify-center px-6 py-10 text-[1.15rem] text-textPrimary">
       <div className="w-full max-w-4xl flex flex-col items-center gap-6">
         <div className="text-center space-y-2">
           <p className="text-sm uppercase tracking-wide text-textPrimary">
