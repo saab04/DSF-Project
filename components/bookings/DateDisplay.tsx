@@ -154,7 +154,7 @@ const DateDisplay = () => {
                 pathname: "/bookings/payment",
                 query: { ...details, smallRooms, mediumRooms, largeRooms },
               }}
-              className="flex justify-center items-center bg-buttons px-8 py-4 rounded-md text-textPrimary"
+              className="flex justify-center items-center bg-buttons px-8 py-4 rounded-md text-textPrimary hover:bg-buttonsHover transition"
             >
               Verify details and proceed to payment
             </Link>

@@ -7,6 +7,11 @@ import { LoaderCircle } from "lucide-react";
 const SignUpForm = () => {
   const [state, action, pending] = useActionState(SignUp, {});
   const [visible, setVisible] = useState(false);
+  const [number, setNumber] = useState("");
+  const handleNumber = (e: any) => {
+    const input = e.target.value.replace(/\D/g, "");
+    setNumber(input);
+  };
   useEffect(() => {
     const showEror = async () => {
       setVisible(true);
@@ -16,7 +21,7 @@ const SignUpForm = () => {
     showEror();
   }, [state]);
   return (
-    <div className="w-[80vw] max-w-100 flex flex-col aspect-9/10 max-h-110 bg-foreground rounded-[20px] shadow-xl text-textPrimary relative">
+    <div className="w-[80vw] max-w-100 flex flex-col aspect-9/10 min-h-112.5 max-h-120 bg-foreground rounded-[20px] shadow-xl text-textPrimary relative">
       <div className="flex justify-center items-center w-full h-[20%] min-h-12">
         <h2 className="sm:text-[30px] text-[25px]">Sign Up</h2>
       </div>
@@ -37,6 +42,17 @@ const SignUpForm = () => {
           name="email"
           defaultValue={state?.values?.email}
           placeholder="Email"
+          required
+          className="w-[80%] h-9.5 rounded-md bg-white px-3 mb-3 sm:h-11 focus:outline-0 shadow"
+        />
+        <input
+          type="text"
+          name="phone"
+          minLength={9}
+          maxLength={10}
+          value={number}
+          onChange={handleNumber}
+          placeholder="Phone number (swedish)"
           required
           className="w-[80%] h-9.5 rounded-md bg-white px-3 mb-3 sm:h-11 focus:outline-0 shadow"
         />

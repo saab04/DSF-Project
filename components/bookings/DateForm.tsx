@@ -126,7 +126,7 @@ const DateForm = () => {
               pathname: "/bookings/rooms",
               query: { checkIn, checkOut, guests },
             }}
-            className="flex justify-center items-center bg-buttons w-[30%] min-w-30 h-[120%] min-h-10 text-[20px] cursor-pointer absolute sm:top-0 top-[calc(100%+30px)] right-0 rounded-md"
+            className="flex justify-center items-center bg-buttons w-[30%] min-w-30 h-[120%] min-h-10 text-[20px] cursor-pointer absolute sm:top-0 top-[calc(100%+30px)] right-0 rounded-md hover:bg-buttonsHover transition"
           >
             Book now
           </Link>

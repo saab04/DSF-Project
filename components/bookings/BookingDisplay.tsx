@@ -1,5 +1,13 @@
 import CancelBookingButton from "./CancelBookingButton";
-import { Calendar, Users, BedSingle, BedDouble } from "lucide-react";
+import { getPhoneNumber, getEmail, isAdmin } from "@/lib/auth";
+import {
+  Mail,
+  Phone,
+  Calendar,
+  Users,
+  BedSingle,
+  BedDouble,
+} from "lucide-react";
 
 interface Props {
   booking: {
@@ -16,11 +24,27 @@ interface Props {
 }
 
 const BookingDisplay = async ({ booking }: Props) => {
+  const [phoneNumber, email, admin] = await Promise.all([
+    getPhoneNumber(booking.UserID),
+    getEmail(booking.UserID),
+    isAdmin(),
+  ]);
   return (
     <div className="sm:w-[70%] sm:min-w-125 min-w-full min-h-50 bg-foreground text-textPrimary shadow rounded-md mb-5 flex flex-col flex-wrap">
-      <div className="w-full h-15">
+      <div className="flex sm:flex-row flex-col w-full sm:h-15 h-auto">
         <h3 className="text-[30px] text-center mt-3 w-20">#{booking.id}</h3>
-        <h3></h3>
+        {admin && (
+          <div className="flex flex-1 flex-wrap justify-center">
+            <div className="min-w-62.5 flex justify-start items-center gap-1 text-gray-400 pl-5">
+              <Phone size={18} />
+              <p className="text-textPrimary">{phoneNumber}</p>
+            </div>
+            <div className="min-w-62.5 flex justify-start items-center gap-1 text-gray-400 pl-5">
+              <Mail size={18} />
+              <p className="text-textPrimary">{email}</p>
+            </div>
+          </div>
+        )}
       </div>
       <div className="w-full min-h-35 flex justify-center flex-wrap">
         <div className="lg:w-[33%] w-[50%] min-w-62.5 h-35 flex justify-center items-center">

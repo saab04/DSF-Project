@@ -1,9 +1,11 @@
 "use server"
 import { createClient } from "./supabase/server"
+import {parsePhoneNumberFromString} from "libphonenumber-js"
 
 export async function SignUp(prevState: {}, formData: FormData) {
     const username = formData.get("username") as string;
     const email = formData.get("email") as string;
+    const phone = formData.get("phone") as string;
     const password = formData.get("password") as string;
 
     const supabase = await createClient();
@@ -13,6 +15,11 @@ export async function SignUp(prevState: {}, formData: FormData) {
 
     if (usernameTaken) {
         return {err: "Username already taken. Please choose a different one.", values}
+    }
+
+    const phoneNumber = parsePhoneNumberFromString(phone, "SE");
+    if(!phoneNumber?.isValid() || phoneNumber.country !== "SE"){
+        return {err: "Please enter a valid Swedish phone number.", values}
     }
 
     const response = await supabase.auth.signUp({
@@ -27,11 +34,16 @@ export async function SignUp(prevState: {}, formData: FormData) {
         return {err: response.error.message, values};
     }
 
-    await supabase.from("Users").insert({
+    const { error } = await supabase.from("Users").insert({
         id: response.data.user?.id,
         Username: username,
-        Email: email
+        Email: email,
+        Phone: phoneNumber.formatNational(),
     });
+
+    if(error){
+        return {err: "Failed to sign up", values}
+    }
 
     return {}
 }
@@ -68,6 +80,7 @@ export async function getUsername() {
     return username;
 }
 
+
 export async function isAdmin() {
     const supabase = await createClient();
     const {data: isAdmin, error} = await supabase.rpc("is_admin");
@@ -93,6 +106,24 @@ export async function availableRooms() {
         }
     }
     return roomTotal
+}
+
+export async function getPhoneNumber(id: string) {
+    const supabase = await createClient();
+    const {data: phoneNumber, error} = await supabase.rpc("get_phone_by_userid", {userid: id});
+    if(error){
+        return "Failed to get phone number";
+    }
+    return phoneNumber;
+}
+
+export async function getEmail(id: string) {
+    const supabase = await createClient();
+    const {data: email, error} = await supabase.rpc("get_email_by_userid", {userid: id});
+    if(error){
+        return "Failed to get email";
+    }
+    return email;
 }
 
 
