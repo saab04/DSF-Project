@@ -62,6 +62,7 @@ const CancelBookingBox = ({ setShowBox, bookingID }: BoxProps) => {
                   return;
                 }
                 router.refresh();
+                await new Promise((resolve) => setTimeout(resolve, 2000));
                 setShowBox(false);
                 setLoading(false);
               }}
