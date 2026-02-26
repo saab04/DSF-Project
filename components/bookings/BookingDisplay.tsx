@@ -92,7 +92,7 @@ const BookingDisplay = async ({ booking }: Props) => {
           </div>
         </div>
         <div className="lg:w-[33%] w-[50%] min-w-62.5 h-35 flex justify-center items-center">
-          <CancelBookingButton />
+          <CancelBookingButton id={booking.id} />
         </div>
       </div>
     </div>
