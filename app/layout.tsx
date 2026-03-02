@@ -3,6 +3,7 @@ import { Viewport } from "next";
 import Link from "next/link";
 import "./globals.css";
 import UserMenu from "@/components/layout/UserMenu";
+import { Mail, Phone } from "lucide-react";
 
 export const metadata: Metadata = {
   title: "NextBooking",
@@ -32,8 +33,19 @@ export default function RootLayout({
           {children}
         </main>
         <footer className="flex justify-center bg-primary relative">
-          <div className="absolute top-5 text-[32px] text-textHF">
-            NextBooking
+          <div className="flex flex-col gap-3 absolute top-5 text-textHF">
+            <div className="text-[32px]">NextBooking</div>
+            <div className="flex flex-col items-center">
+              <p>Contact us:</p>
+              <div className="flex items-center gap-1.5">
+                <Phone size={16} />
+                <p>070-000 00 00</p>
+              </div>
+              <div className="flex items-center gap-1.5">
+                <Mail size={16} />
+                <p>nextbooking@live.se</p>
+              </div>
+            </div>
           </div>
         </footer>
       </body>

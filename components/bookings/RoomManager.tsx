@@ -84,7 +84,7 @@ const RoomManager = ({
           </button>
         </div>
         <div className="flex-1 flex flex-col justify-center items-center relative">
-          <p className="absolute top-2 w-full text-center">Booked rooms</p>
+          <p className="absolute top-2 w-full text-center">Booked</p>
           <p className="text-[20px]">{countBooked}</p>
         </div>
       </div>

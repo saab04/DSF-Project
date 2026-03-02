@@ -3,6 +3,7 @@
 import { useState, useEffect, useCallback } from "react";
 import Link from "next/link";
 import { getAvailableRoomCounts } from "@/lib/bookings";
+import { ChevronDown, ChevronUp } from "lucide-react";
 
 type Details = {
   checkIn?: string;
@@ -63,7 +64,7 @@ const DateDisplay = () => {
   const canProceed = availability && !availabilityError && !exceedsAvailability;
 
   return (
-    <div className="h-full flex flex-col items-center justify-center px-6 py-10 text-[1.15rem]">
+    <div className="h-full flex flex-col items-center justify-center px-6 py-10 text-[1.15rem] select-none">
       <div className="w-full max-w-4xl flex flex-col items-center gap-6">
         <div className="text-center space-y-2">
           <p className="text-sm uppercase tracking-wide text-textPrimary">
@@ -94,40 +95,115 @@ const DateDisplay = () => {
           </div>
         ) : null}
         <div className="w-full flex flex-col md:flex-row md:flex-nowrap justify-center gap-6">
-          <div className="border border-gray-300 p-5 rounded-lg min-w-[200px] text-center">
+          <div className="border border-gray-300 p-5 rounded-lg min-w-50 text-center">
             <h3 className="text-lg font-semibold">Room: Small</h3>
             <p>Available: {availability ? availability.small : "..."}</p>
-            <input
-              className="mt-2 w-full rounded-md border border-gray-300 px-3 py-2"
-              type="number"
-              min="0"
-              value={smallRooms}
-              onChange={(e) => setSmallRooms(parseInt(e.target.value) || 0)}
-            />
+            <div className="relative">
+              <input
+                className="mt-2 w-full rounded-md border border-gray-300 px-3 py-2 outline-0 text-transparent"
+                type="number"
+                disabled={true}
+              />
+              <div className="flex flex-col h-[calc(100%-8px)] aspect-square absolute right-1 top-2">
+                <div className="flex-1 flex justify-end items-center">
+                  <ChevronUp
+                    size={22}
+                    className="cursor-pointer hover:scale-120"
+                    onClick={(e) => {
+                      setSmallRooms((prev) => prev + 1);
+                    }}
+                  />
+                </div>
+                <div className="flex-1 flex justify-end items-center">
+                  <ChevronDown
+                    size={22}
+                    className="cursor-pointer hover:scale-120"
+                    onClick={(e) => {
+                      if (smallRooms >= 1) {
+                        setSmallRooms((prev) => prev - 1);
+                      }
+                    }}
+                  />
+                </div>
+              </div>
+              <span className="flex justify-center items-center h-[calc(100%-8px)] w-8 absolute left-1 top-2">
+                {smallRooms}
+              </span>
+            </div>
           </div>
 
-          <div className="border border-gray-300 p-5 rounded-lg min-w-[200px] text-center">
+          <div className="border border-gray-300 p-5 rounded-lg min-w-50 text-center">
             <h3 className="text-lg font-semibold">Room: Medium</h3>
             <p>Available: {availability ? availability.medium : "..."}</p>
-            <input
-              className="mt-2 w-full rounded-md border border-gray-300 px-3 py-2"
-              type="number"
-              min="0"
-              value={mediumRooms}
-              onChange={(e) => setMediumRooms(parseInt(e.target.value) || 0)}
-            />
+            <div className="relative">
+              <input
+                className="mt-2 w-full rounded-md border border-gray-300 px-3 py-2 outline-0 text-transparent"
+                type="number"
+                disabled={true}
+              />
+              <div className="flex flex-col h-[calc(100%-8px)] aspect-square absolute right-1 top-2">
+                <div className="flex-1 flex justify-end items-center">
+                  <ChevronUp
+                    size={22}
+                    className="cursor-pointer hover:scale-120"
+                    onClick={(e) => {
+                      setMediumRooms((prev) => prev + 1);
+                    }}
+                  />
+                </div>
+                <div className="flex-1 flex justify-end items-center">
+                  <ChevronDown
+                    size={22}
+                    className="cursor-pointer hover:scale-120"
+                    onClick={(e) => {
+                      if (mediumRooms >= 1) {
+                        setMediumRooms((prev) => prev - 1);
+                      }
+                    }}
+                  />
+                </div>
+              </div>
+              <span className="flex justify-center items-center h-[calc(100%-8px)] w-8 absolute left-1 top-2">
+                {mediumRooms}
+              </span>
+            </div>
           </div>
 
-          <div className="border border-gray-300 p-5 rounded-lg min-w-[200px] text-center">
+          <div className="border border-gray-300 p-5 rounded-lg min-w-50 text-center">
             <h3 className="text-lg font-semibold">Room: Large</h3>
             <p>Available: {availability ? availability.large : "..."}</p>
-            <input
-              className="mt-2 w-full rounded-md border border-gray-300 px-3 py-2"
-              type="number"
-              min="0"
-              value={largeRooms}
-              onChange={(e) => setLargeRooms(parseInt(e.target.value) || 0)}
-            />
+            <div className="relative">
+              <input
+                className="mt-2 w-full rounded-md border border-gray-300 px-3 py-2 outline-0 text-transparent"
+                type="number"
+                disabled={true}
+              />
+              <div className="flex flex-col h-[calc(100%-8px)] aspect-square absolute right-1 top-2">
+                <div className="flex-1 flex justify-end items-center">
+                  <ChevronUp
+                    size={22}
+                    className="cursor-pointer hover:scale-120"
+                    onClick={(e) => {
+                      setLargeRooms((prev) => prev + 1);
+                    }}
+                  />
+                </div>
+                <div className="flex-1 flex justify-end items-center">
+                  <ChevronDown
+                    size={22}
+                    className="cursor-pointer hover:scale-120"
+                    onClick={(e) => {
+                      if (largeRooms >= 1) {
+                        setLargeRooms((prev) => prev - 1);
+                      }
+                    }}
+                  />
+                </div>
+              </div>
+              <span className="flex justify-center items-center h-[calc(100%-8px)] w-8 absolute left-1 top-2">
+                {largeRooms}
+              </span>
+            </div>
           </div>
         </div>
         <div className="w-full flex justify-center">

@@ -13,18 +13,18 @@ export default async function Cancel({ searchParams }) {
         <p>
           Payment cancelled. If you have any questions, please email{' '}
         </p>
-        <a href="mailto:NextBooking@live.se">NextBooking@live.se</a>.
+        <a href="mailto:nextbooking@live.se">nextbooking@live.se</a>.
         </section>
         <div className="flex flex-row gap-6 mt-8 justify-center">
         <Link 
             href="/"
-            className="flex text-center justify-center items-center w-[200px] h-[60px] bg-buttons hover:bg-buttonsHover rounded-2xl text-[20px] shadow-xl text-textPrimary transition duration-200 active:scale-95"
+            className="flex text-center justify-center items-center w-50 h-15 bg-buttons hover:bg-buttonsHover rounded-2xl text-[20px] shadow-xl text-textPrimary transition duration-200 active:scale-95"
             >
             Back to home
         </Link>
         <Link 
             href="/dashboard"
-            className="flex text-center justify-center items-center w-[200px] h-[60px] bg-buttons hover:bg-buttonsHover rounded-2xl text-[20px] shadow-xl text-textPrimary transition duration-200 active:scale-95"
+            className="flex text-center justify-center items-center w-50 h-15 bg-buttons hover:bg-buttonsHover rounded-2xl text-[20px] shadow-xl text-textPrimary transition duration-200 active:scale-95"
             >
             Your account
         </Link>
