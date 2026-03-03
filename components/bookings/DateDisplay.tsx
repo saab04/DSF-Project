@@ -37,9 +37,15 @@ const DateDisplay = () => {
   }, []);
 
   const loadAvailability = useCallback(async () => {
+    if (!details.checkIn || !details.checkOut) {
+      setAvailability(null);
+      setAvailabilityError("Missing booking dates");
+      return;
+    }
+
     setIsCheckingAvailability(true);
     setAvailabilityError(null);
-    const result = await getAvailableRoomCounts();
+    const result = await getAvailableRoomCounts(details.checkIn, details.checkOut);
     if ("error" in result) {
       setAvailability(null);
       setAvailabilityError(result.error || "An error occurred");
@@ -48,12 +54,17 @@ const DateDisplay = () => {
     }
 
     setAvailability(result.available);
+    setSmallRooms((prev) => Math.min(prev, result.available.small));
+    setMediumRooms((prev) => Math.min(prev, result.available.medium));
+    setLargeRooms((prev) => Math.min(prev, result.available.large));
     setIsCheckingAvailability(false);
-  }, []);
+  }, [details.checkIn, details.checkOut]);
 
   useEffect(() => {
-    loadAvailability();
-  }, [loadAvailability]);
+    if (details.checkIn && details.checkOut) {
+      loadAvailability();
+    }
+  }, [details.checkIn, details.checkOut, loadAvailability]);
 
   const exceedsAvailability =
     availability &&
@@ -61,7 +72,12 @@ const DateDisplay = () => {
       mediumRooms > availability.medium ||
       largeRooms > availability.large);
 
-  const canProceed = availability && !availabilityError && !exceedsAvailability;
+  const canProceed =
+    availability &&
+    details.checkIn &&
+    details.checkOut &&
+    !availabilityError &&
+    !exceedsAvailability;
 
   return (
     <div className="h-full flex flex-col items-center justify-center px-6 py-10 text-[1.15rem] select-none">
@@ -110,7 +126,10 @@ const DateDisplay = () => {
                     size={22}
                     className="cursor-pointer hover:scale-120"
                     onClick={(e) => {
-                      setSmallRooms((prev) => prev + 1);
+                      setSmallRooms((prev) => {
+                        const max = availability?.small ?? 0;
+                        return prev < max ? prev + 1 : prev;
+                      });
                     }}
                   />
                 </div>
@@ -147,7 +166,10 @@ const DateDisplay = () => {
                     size={22}
                     className="cursor-pointer hover:scale-120"
                     onClick={(e) => {
-                      setMediumRooms((prev) => prev + 1);
+                      setMediumRooms((prev) => {
+                        const max = availability?.medium ?? 0;
+                        return prev < max ? prev + 1 : prev;
+                      });
                     }}
                   />
                 </div>
@@ -184,7 +206,10 @@ const DateDisplay = () => {
                     size={22}
                     className="cursor-pointer hover:scale-120"
                     onClick={(e) => {
-                      setLargeRooms((prev) => prev + 1);
+                      setLargeRooms((prev) => {
+                        const max = availability?.large ?? 0;
+                        return prev < max ? prev + 1 : prev;
+                      });
                     }}
                   />
                 </div>

@@ -64,7 +64,7 @@ export async function POST(request) {
       return NextResponse.json({ error: 'Missing booking details' }, { status: 400 })
     }
 
-    const availabilityResult = await getAvailableRoomCounts()
+    const availabilityResult = await getAvailableRoomCounts(checkIn, checkOut)
     if ('error' in availabilityResult) {
       return NextResponse.json({ error: 'Could not verify availability' }, { status: 503 })
     }

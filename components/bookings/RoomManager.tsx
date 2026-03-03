@@ -10,7 +10,6 @@ interface Props {
   add: any;
   removeFunction: any;
   count: any;
-  countBooked: any;
   addFunction: any;
 }
 
@@ -21,7 +20,6 @@ const RoomManager = ({
   add,
   removeFunction,
   count,
-  countBooked,
   addFunction,
 }: Props) => {
   const [loading, setLoading] = useState(false);
@@ -48,9 +46,7 @@ const RoomManager = ({
                 setLoading(false);
                 return;
               }
-              setAvailable((prev: number) =>
-                prev > countBooked ? prev - 1 : prev,
-              );
+              setAvailable((prev: number) => Math.max(0, prev - 1));
               setLoading(false);
             }}
             disabled={loading}
@@ -82,10 +78,6 @@ const RoomManager = ({
           >
             {add}
           </button>
-        </div>
-        <div className="flex-1 flex flex-col justify-center items-center relative">
-          <p className="absolute top-2 w-full text-center">Booked</p>
-          <p className="text-[20px]">{countBooked}</p>
         </div>
       </div>
     </div>

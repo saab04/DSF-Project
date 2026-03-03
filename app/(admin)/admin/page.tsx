@@ -2,37 +2,18 @@ import {
   addRooms,
   countRooms,
   removeRooms,
-  countBookedRoomAIO,
   getAllActiveBookings,
 } from "@/lib/bookings";
 import RoomManager from "@/components/bookings/RoomManager";
 import BookingDisplay from "@/components/bookings/BookingDisplay";
 import { BedSingle, BedDouble, Minus, Plus } from "lucide-react";
 const Admin = async () => {
-  const [
-    small,
-    medium,
-    large,
-    bookedTotals,
-    allBookings,
-  ] = await Promise.all([
+  const [small, medium, large, allBookings] = await Promise.all([
     countRooms("Small"),
     countRooms("Medium"),
     countRooms("Large"),
-    countBookedRoomAIO(),
     getAllActiveBookings(),
   ]);
-
-  const totals =
-    typeof bookedTotals === "string"
-      ? {
-          totalbooked_small: 0,
-          totalbooked_medium: 0,
-          totalbooked_large: 0,
-        }
-      : bookedTotals;
-
-  const { totalbooked_small, totalbooked_medium, totalbooked_large } = totals;
 
   const bookings = allBookings?.bookings;
   return (
@@ -50,7 +31,6 @@ const Admin = async () => {
             add={<Plus size={40} color="var(--textPrimary)" />}
             removeFunction={removeRooms}
             count={small}
-            countBooked={totalbooked_small}
             addFunction={addRooms}
           />
           <RoomManager
@@ -60,7 +40,6 @@ const Admin = async () => {
             add={<Plus size={40} color="var(--textPrimary)" />}
             removeFunction={removeRooms}
             count={medium}
-            countBooked={totalbooked_medium}
             addFunction={addRooms}
           />
           <RoomManager
@@ -70,7 +49,6 @@ const Admin = async () => {
             add={<Plus size={40} color="var(--textPrimary)" />}
             removeFunction={removeRooms}
             count={large}
-            countBooked={totalbooked_large}
             addFunction={addRooms}
           />
         </div>
