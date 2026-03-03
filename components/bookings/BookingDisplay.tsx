@@ -47,7 +47,7 @@ const BookingDisplay = async ({ booking }: Props) => {
         )}
       </div>
       <div className="w-full min-h-35 flex justify-center flex-wrap">
-        <div className="lg:w-[33%] w-[50%] min-w-62.5 h-35 flex justify-center items-center">
+        <div className="lg:w-[33%] w-[50%] min-w-64 h-35 flex justify-center items-center">
           <div className="flex flex-col justify-center gap-2 w-full h-full p-5">
             <div className="flex justify-start items-center gap-2 text-gray-400">
               <Calendar size={18} />
@@ -66,7 +66,7 @@ const BookingDisplay = async ({ booking }: Props) => {
             </div>
           </div>
         </div>
-        <div className="lg:w-[33%] w-[50%] min-w-62.5 h-35 flex justify-center items-center">
+        <div className="lg:w-[33%] w-[50%] min-w-64 h-35 flex justify-center items-center">
           <div className="flex flex-col justify-center gap-2 w-full h-full p-5">
             {booking.RoomAmmount_Small > 0 && (
               <div className="flex justify-start items-center gap-2 text-gray-400">
