@@ -4,6 +4,7 @@ import { useState, useEffect, useCallback } from "react";
 import Link from "next/link";
 import { getAvailableRoomCounts } from "@/lib/bookings";
 import { ChevronDown, ChevronUp } from "lucide-react";
+import RoomSlider from "../layout/RoomSlider";
 
 type Details = {
   checkIn?: string;
@@ -45,7 +46,10 @@ const DateDisplay = () => {
 
     setIsCheckingAvailability(true);
     setAvailabilityError(null);
-    const result = await getAvailableRoomCounts(details.checkIn, details.checkOut);
+    const result = await getAvailableRoomCounts(
+      details.checkIn,
+      details.checkOut,
+    );
     if ("error" in result) {
       setAvailability(null);
       setAvailabilityError(result.error || "An error occurred");
@@ -112,7 +116,15 @@ const DateDisplay = () => {
         ) : null}
         <div className="w-full flex flex-col md:flex-row md:flex-nowrap justify-center gap-6">
           <div className="border border-gray-300 p-5 rounded-lg min-w-50 text-center">
-            <h3 className="text-lg font-semibold">Room: Small</h3>
+            <RoomSlider
+              images={[
+                "/bed-4416515_1920.webp",
+                "/hotel-1979406_1920.webp",
+                "/gym-bg-1.webp",
+              ]}
+            />
+            <h3 className="text-lg font-semibold pt-2">Room: Small</h3>
+            <p className="text-[15px] text-gray-400">18 m² ( 1 bed )</p>
             <p>Available: {availability ? availability.small : "..."}</p>
             <div className="relative">
               <input
@@ -152,7 +164,15 @@ const DateDisplay = () => {
           </div>
 
           <div className="border border-gray-300 p-5 rounded-lg min-w-50 text-center">
-            <h3 className="text-lg font-semibold">Room: Medium</h3>
+            <RoomSlider
+              images={[
+                "/bed-4416515_1920.webp",
+                "/hotel-1979406_1920.webp",
+                "/gym-bg-1.webp",
+              ]}
+            />
+            <h3 className="text-lg font-semibold pt-2">Room: Medium</h3>
+            <p className="text-[15px] text-gray-400">18 - 20 m² ( 2 beds )</p>
             <p>Available: {availability ? availability.medium : "..."}</p>
             <div className="relative">
               <input
@@ -192,7 +212,15 @@ const DateDisplay = () => {
           </div>
 
           <div className="border border-gray-300 p-5 rounded-lg min-w-50 text-center">
-            <h3 className="text-lg font-semibold">Room: Large</h3>
+            <RoomSlider
+              images={[
+                "/bed-4416515_1920.webp",
+                "/hotel-1979406_1920.webp",
+                "/gym-bg-1.webp",
+              ]}
+            />
+            <h3 className="text-lg font-semibold pt-2">Room: Large</h3>
+            <p className="text-[15px] text-gray-400">27 - 37 m² ( 4 beds )</p>
             <p>Available: {availability ? availability.large : "..."}</p>
             <div className="relative">
               <input

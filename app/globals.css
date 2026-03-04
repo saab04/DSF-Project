@@ -84,7 +84,7 @@ body {
   min-height: 130dvh;
   overflow-x: hidden;
   grid-template-columns: repeat(3, 1fr);
-  grid-template-rows: var(--header-h) auto var(--footer-h);
+  grid-template-rows: var(--header-h) auto auto;
   grid-template-areas: 
   "header header header"
   "main main main"
@@ -97,10 +97,12 @@ header {
 
 main {
   grid-area: main;
+  min-height: calc(100dvh - var(--header-h));
   padding: 20px;
 }
 
 footer {
   grid-area: footer;
+  min-height: var(--footer-h);
 }
 

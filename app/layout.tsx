@@ -3,7 +3,7 @@ import { Viewport } from "next";
 import Link from "next/link";
 import "./globals.css";
 import UserMenu from "@/components/layout/UserMenu";
-import { Mail, Phone } from "lucide-react";
+import { Mail, Phone, Facebook, Instagram } from "lucide-react";
 
 export const metadata: Metadata = {
   title: "NextBooking",
@@ -32,18 +32,37 @@ export default function RootLayout({
         <main className="flex justify-center items-center bg-background relative">
           {children}
         </main>
-        <footer className="flex justify-center bg-primary relative">
-          <div className="flex flex-col gap-3 absolute top-5 text-textHF">
+        <footer className="flex flex-col bg-primary h-auto">
+          <div className="w-full h-20 flex justify-center items-center gap-3 text-textHF">
             <div className="text-[32px]">NextBooking</div>
-            <div className="flex flex-col items-center">
-              <p>Contact us:</p>
-              <div className="flex items-center gap-1.5">
-                <Phone size={16} />
-                <p>070-000 00 00</p>
+          </div>
+          <div className="flex-1 flex justify-center gap-7 flex-wrap p-5">
+            <div className="w-[80vw] h-30 sm:max-w-65 flex flex-col text-textHF">
+              <p className="text-[20px] text-center py-2">Follow us</p>
+              <div className="w-full flex-1 flex flex-col items-center gap-2">
+                <div className="w-[80%] h-14 flex items-center justify-center gap-3">
+                  <Facebook
+                    size={45}
+                    className="cursor-pointer hover:scale-120 transition"
+                  />
+                  <Instagram
+                    size={45}
+                    className="cursor-pointer hover:scale-120 transition"
+                  />
+                </div>
               </div>
-              <div className="flex items-center gap-1.5">
-                <Mail size={16} />
-                <p>nextbooking@live.se</p>
+            </div>
+            <div className="w-[80vw] h-30 sm:max-w-65 flex flex-col text-textHF ">
+              <p className="text-[20px] text-center py-2">Contact us</p>
+              <div className="w-full flex-1 flex flex-col items-center gap-2">
+                <div className="w-[80%] flex items-center justify-center gap-2">
+                  <Phone size={18} />
+                  <p>070-000 00 00</p>
+                </div>
+                <div className="w-[80%] flex items-center justify-center gap-2">
+                  <Mail size={18} />
+                  <p>070-000 00 00</p>
+                </div>
               </div>
             </div>
           </div>
