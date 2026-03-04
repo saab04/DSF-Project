@@ -39,11 +39,13 @@ const Slider = ({ images, setShowSlider }: SliderProps) => {
   const [current, setCurrent] = useState(0);
 
   const next = () => {
-    if (current < images.length - 1) setCurrent((current + 1) % images.length);
+    if (current < images.length - 1) {
+      setCurrent(current + 1);
+    }
   };
   const prev = () => {
     if (current > 0) {
-      setCurrent((current - 1 + images.length) % images.length);
+      setCurrent(current - 1);
     }
   };
   return (
