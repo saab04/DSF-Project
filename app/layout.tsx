@@ -61,7 +61,7 @@ export default function RootLayout({
                 </div>
                 <div className="w-[80%] flex items-center justify-center gap-2">
                   <Mail size={18} />
-                  <p>070-000 00 00</p>
+                  <p>nextbooking@live.se</p>
                 </div>
               </div>
             </div>
